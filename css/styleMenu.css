@@ -1,0 +1,529 @@
+/* Font Properties */
+@font-face {
+  font-family: 'OpenSanRegular';
+  src: url('../fonts/opensans-regular-webfont.eot');
+  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/opensans-regular-webfont.woff') format('woff'),
+       url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-regular-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OpenSanBold';
+  src: url('../fonts/opensans-bold-webfont.eot');
+  src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/opensans-bold-webfont.woff') format('woff'),
+       url('../fonts/opensans-bold-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSanExtraBold';
+  src: url('../fonts/opensans-extrabold-webfont.eot');
+  src: url('../fonts/opensans-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/opensans-extrabold-webfont.woff') format('woff'),
+       url('../fonts/opensans-extrabold-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-extrabold-webfont.svg#open_sansextrabold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+#homePage .home, #aboutUsPage .aboutUs, #branchesPage .branches, #contactUsPage .contactUs {
+  background-color: #FF5151;
+}
+
+body {
+  font-family: 'OpenSanRegular';
+}
+
+.cssmenu {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 597px;
+  height: 48px;
+}
+.cssmenu ul,
+.cssmenu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+.cssmenu ul {
+  position: relative;
+  /* z-index: 597; */
+}
+.cssmenu ul li {
+  float: left;
+  min-height: 1px;
+  vertical-align: middle;
+}
+.cssmenu ul li.hover,
+.cssmenu ul li:hover {
+  position: relative;
+  z-index: 599;
+  cursor: default;
+}
+.cssmenu ul ul {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 598;
+  width: 100%;
+}
+.cssmenu ul ul li {
+  float: none;
+}
+.cssmenu ul ul ul {
+  top: 0;
+  left: 190px;
+  width: 190px;
+}
+.cssmenu ul li:hover > ul {
+  visibility: visible;
+}
+.cssmenu ul ul {
+  bottom: 0;
+  left: 0;
+}
+.cssmenu ul ul {
+  margin-top: 0;
+}
+.cssmenu ul ul li {
+  font-weight: normal;
+}
+.cssmenu a {
+  display: block;
+  line-height: 1em;
+  text-decoration: none;
+}
+/* Custom CSS Styles */
+.cssmenu {
+  background: #333333;
+  font-family: "OpenSanRegular";
+  font-size: 12px;
+}
+.cssmenu > ul {
+  *display: inline-block;
+}
+.cssmenu:after,
+.cssmenu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.cssmenu ul {
+  text-transform: uppercase;
+}
+.cssmenu ul ul {
+ /* border-top: 4px solid .FF5151; */
+  text-transform: none;
+  min-width: 190px;
+}
+.cssmenu ul ul a {
+  background: #FF5151;
+  color: #ffffff;
+   border-bottom: 1px solid #FF5151;
+  border-right: 1px solid #FF5151;
+  border-left: 1px solid #FF5151;
+  border-top: 1px solid #FF4444;
+  line-height: 150%;
+  padding: 16px 20px;
+  font-size: 12px;
+}
+.cssmenu ul ul ul {
+  border-top: 0 none;
+}
+.cssmenu ul ul li {
+  position: relative;
+}
+.cssmenu ul ul li:first-child > a {
+  border-top: 1px solid #FF5151; /* ligth red */
+}
+.cssmenu ul ul li:hover > a {
+  background: #FF3333;
+  color: #ffffff;
+  font-weight: bold;
+}
+.cssmenu ul ul li:last-child > a {
+  -moz-border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -moz-box-shadow: 0 1px 0 #FF5151;
+  -webkit-box-shadow: 0 1px 0 #FF5151;
+  box-shadow: 0 1px 0 #FF5151;
+}
+.cssmenu ul ul li:last-child:hover > a {
+  -moz-border-radius: 0 0 0 3px;
+  -webkit-border-radius: 0 0 0 3px;
+  border-radius: 0 0 0 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.cssmenu ul ul li.has-sub > a:after {
+  content: '\25BA';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -8px;
+}
+.cssmenu ul li:hover > a,
+.cssmenu ul li:active > a:active {
+  background: #FF5151;
+  color: #ffffff;
+}
+.cssmenu ul li.has-sub > a:after {
+  content: '+';
+  margin-left: 5px;
+}
+.cssmenu ul li.last ul {
+  left: auto;
+  right: 0;
+}
+.cssmenu ul li.last ul ul {
+  left: auto;
+  right: 99.5%;
+}
+.cssmenu a {
+  background: #333333;
+  color: #CBCBCB;
+  padding: 0 20px; 
+}
+.cssmenu > ul > li > a {
+  line-height: 48px;
+  font-size: 12px;
+ /* padding-right: 30px; */ 
+}
+.cssmenu li a {
+  padding-left: 25px;
+}
+
+.cssmenu li.current {
+  background: #FF5151;
+  color: #CBCBCB;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.searchCargoContainer {
+    width: 199px;
+    height: 48px;
+    background-color: #333333;
+    border-left: 1px solid #282828;
+    display: inline-block;
+    padding-right: 1px;
+    position: relative;
+    display: inline-block;
+    padding-left: 5px;
+}
+.searchCargoBox {
+    background-color: #4c5262;
+    border: 0 solid #000000;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: "OpenSanRegular";
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: -160px;
+    padding: 5px 10px;
+    position: relative;
+    width: 175px;
+}
+.search-button {
+    height  : 20px;
+    width   : 20px;
+    left    : 165px;
+    position: relative;
+    margin-left: -190px; 
+    left: 160px;
+    top: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.menuAlignToSearchBox {
+  position: relative;
+  float: left;
+}
+.loginContainer{
+  border-color: #333333;
+  width: 15%;
+  border-left: 1px solid #282828;
+  position: relative;
+  height: 100%;
+  float: right;
+}
+/*
+.txtLogin {
+  margin-left: 0px;
+  font-family: 'OpenSanRegular';
+  font-size: 12px;
+  padding-top: 12px;
+}
+.txtLogin span:hover {
+  color: #FF5151;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.txtLogin span:active {
+  color: #FF3737;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.txtLogin span {
+  color:#ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: "OpenSanRegular";
+  font-size: 12px;
+}
+*/
+
+/* logIn Form properties*/
+      .loginFormContainer {
+      width           : 300px;
+      height          : 310px;
+      margin-top      : 4px;
+      margin-left     : -145px;
+      background-color: #5F5F5F;
+      border-radius   : 7px;
+      z-index         : 999;
+    }
+      .logintextField {
+      width                     : 200px;
+      height                    : 35px;
+      border-top-right-radius   : 4px;
+      border-bottom-right-radius: 4px;
+      border                    : none;
+      display                   : inline-block;
+      margin-top                : 17px;
+      padding-left              : 10.4px;
+      font-family               : 'OpenSanRegular';
+    }
+      .usernameIcon {
+      width              : 40px;
+      height             : 35.99px;
+      background-color   : #FC2E4D;
+      display            : inline-block;
+      margin-right       : -5px;
+      margin-bottom      : -13.07px;
+      background-image   : url(../images/name-icon.png);
+      background-repeat  : no-repeat;
+      background-position: center;
+    }
+      .passwordIcon {
+      width              : 40px;
+      height             : 35.99px;
+      background-color   : #FC2E4D;
+      display            : inline-block;
+      margin-right       : -5px;
+      margin-bottom      : -13.07px;
+      background-image   : url(../images/password-icon.png);
+      background-repeat  : no-repeat;
+      background-position: center;
+    }
+      .checkIcon {
+      width              : 40px;
+      height             : 35.99px;
+      background-color   : #FC2E4D;
+      display            : inline-block;
+      margin-right       : -5px;
+      margin-bottom      : -13.07px;
+      background-image   : url(../images/check-icon.png);
+      background-repeat  : no-repeat;
+      background-position: center;
+    }
+    .forgotPassword a:hover {
+      color          : #FF8080;
+      font-size      : 12.5px;
+      text-decoration: none
+    }
+    .forgotPassword a:active {
+      color          : #FF8080;
+      font-size      : 12.1px;
+      text-decoration: none;
+    }
+    .forgotPassword a{
+      color          :#E5E5E5;
+      font-size      : 12px;
+      text-decoration: none;
+      font-family    : 'arial';
+      margin-right   : -120px;
+      margin-top     : 10px;
+      position: relative;
+    }
+    .forgotPassword {
+      margin-top     : 8px;
+    } 
+    .capchaContainer {
+      margin-top: 10px;
+    }
+    #loginMenu {
+      width           : 150px;
+      border          : none;
+      font-weight     : bold;
+      font-size       : 13px;
+      color           : #ffffff;
+      display:table-cell;
+      vertical-align:middle
+      display:inline-block;
+      position: relative;
+      height: 0px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+    #loginMenu:hover {
+      color           : #FF5151;
+      cursor: pointer;
+    }
+
+    .buttonLogin {
+      padding: 8px 25px;
+      border: none;
+      border-radius: 5px;
+      font-family  : 'OpenSanRegular';
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #FF5151;
+      margin-top: 10px;
+    }
+    .buttonLogin:hover { background-color: #FF1C1C; }
+
+
+    .branchSelector {
+      width        : 200px;
+      height       : 35px;
+      border-radius: 4px;
+      border       : none;
+      margin-top   : 15px;
+      text-align   : left;
+      font-size    : 10pt;
+      font-family  : 'OpenSanRegular';
+      padding-left : 12px;
+      position     : relative;
+    }
+    .checkBox {
+      width        : 200px;
+      height       : 20px;
+      border-radius: 3px;
+      font-size    : 11pt;
+      font-family  : 'OpenSanRegular';
+      color        : #E5E5E5;
+      margin-left: -90px;
+    }
+    .floatingMenuContainer {
+      position: fixed;
+      top: 0px;
+      z-index: 99999;
+      width: 970px;
+      margin-left: -495px;
+    }
+
+/* START: Popup Dialog (Search) */
+#divDialog, #divErrorLogin { display:none; }
+.dialogStyle {
+  font-family: "OpenSanRegular";
+  font-size: 12px;
+  background-color: #FF5151;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius:5px;
+
+  width: 600px;
+  height: 250px;
+  margin-left: auto;
+  margin-right: auto;
+
+  position: absolute;
+}
+.errorDialog{
+  background-color: #FF5151;
+  padding: 10px 10px 15px 10px;
+  border-radius:5px;
+  width: 400px;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+}
+#spanErrorMsg{
+  font-family: "OpenSanRegular";
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  height: 32px;
+  display: inline-block;
+
+  /* Vertical Centering */
+
+  /* Firefox */
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  /* Safari, Opera, and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  /* Internet Explorer 10 */
+  display:-ms-flexbox;
+  -ms-flex-pack:left;
+  -ms-flex-align:center;
+}
+.closeImage {
+  float: right;
+  top: -18px;
+  left: 593px;
+  width: 24px;
+  height: 24px;
+}
+.popupLineTop {
+  color: #ffffff;
+  background: #ffffff;
+  width: 560px;
+  height: 4px;
+}
+.popupLineBottom {
+  color: #ffffff;
+  background: #ffffff;
+  width: 600px;
+  height: 4px;
+}
+.searchInfo {
+  padding: 5px 20px 17px 20px;
+  /* border-top: 4px solid #ffffff; */
+  /* border-bottom: 4px solid #ffffff; */
+  /* margin-top: 7px; */
+  margin-bottom: 7px;
+  height: 190px;
+}
+.searchLabel {
+  font-family: "OpenSanRegular";
+  font-size: 12px;
+  font-weight: bold;
+  color: #333333;
+  width: 200px;
+  display: inline-block;
+  vertical-align: top;
+}
+.searchValue {
+  font-family: "OpenSanRegular";
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+  width: 300px;
+  display: inline-block;
+}
+/* END */

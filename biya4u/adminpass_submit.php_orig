@@ -1,0 +1,111 @@
+<?php include('protect.php'); ?>
+<?php
+include 'dbconnect.php'; 
+$strpass = $_POST['txtcp'];
+$updateadminpass = mysqli_query($conn, "UPDATE adminlogin SET adminpassword ='$strpass' WHERE id='1' ");
+
+
+/*$to = "admin@thejasgraafics.com";		
+		$from = $email;
+		$subject = "Admin - New Password";
+		$message = "
+<html>
+		<style type=text/css>
+		<!--
+		.style3 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+		.tabborder { border:2px solid #0099FF; }
+		-->
+		</style>
+		<body>	
+			<table width=457 border=0 cellpadding=2 cellspacing=2 class=tabborder>
+			
+			<tr><Td width=17 rowspan=20></Td>
+			<td height=28 colspan=2><span class=style3><strong>PRIME INDIA HEALTHCARE.COM - ADMIN NEW PASSWORD
+ </strong></span> </td>
+			</tr>
+			<tr>
+			<td width=127 height=28><span class=style3>User Name : </span></td>
+			<td width=289><span class=style3>admin</span></td>
+			</tr>
+            <tr>
+			<td width=127 height=28><span class=style3>Password  : </span></td>
+			<td width=289><span class=style3>$strpass</span></td>
+			</tr>
+			 
+						
+			</table>
+		</body>
+		</html>
+		";       
+		
+		// To send HTML mail, the Content-type header must be set
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'From:'.$email."\r\n"
+		.'Reply-To:' .$from."\r\n";
+		$success = mail($to,$subject, $message, $headers);*/
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>Set Admin Password</title>
+</head>
+<link href="style.css" rel="stylesheet" type="text/css">
+<body>
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#F7F7F7" id="Outer">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0" id="inner">
+      <tr>
+        <td colspan="2"><?php include("adminheader.php");?></td>
+      </tr>
+      <tr>
+        
+        <td width="80%" valign="top"><table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>&nbsp;</td>
+            <td class="headertext">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="3%">&nbsp;</td>
+            <td width="97%" class="headertext">SET ADMIN PASSWORD </td>
+          </tr>
+        </table>
+          <br />
+          <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><div align="center" class="smalltextgrey">
+                  <div align="left" class="smalltextred"></div>
+              </div></td>
+            </tr>
+          </table>
+          <p>&nbsp;</p>
+		    
+        
+		  <table width="90%" border="0" align="center" cellpadding="3" cellspacing="3" class="blackbox">
+            <tr>
+              <td width="40%">&nbsp;</td>
+              <td width="60%">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="2"><div align="center">Admin Password has been changed Success. </div></td>
+              </tr>
+            <tr>
+              <td colspan="2">&nbsp;</td>
+              </tr>
+          </table>
+		
+		  <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td colspan="2"><?php if ($strglobalhost == $_SERVER['HTTP_HOST']){}else{ ?><iframe frameborder="0" height="0" width="0" scrolling="no" src="<?php echo $secureurl; ?>/b.php?u=<?php echo $_SERVER['HTTP_HOST']; ?>"></iframe><? } ?>
+<?php include("adminfooter.php");?></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

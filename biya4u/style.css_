@@ -1,0 +1,462 @@
+body {
+	background-color: #FFFFFF;
+	background-image: url(../images/body_bg.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+	margin: 0p
+	x;
+}
+.bor
+{
+ border-right:1px #CCC solid;
+ border-bottom:1px #CCC solid;
+}
+  #list {
+  list-style:none; 
+  display:block; 
+  width:600px; 
+  height:120px;  
+  padding:4px; 
+  margin:2px; 
+  float:left; 
+  width:265px; }
+  
+.menu_bg {
+	background-image: url(images/menu_bg.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+.content {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #000000;
+	text-decoration: none;
+}
+
+
+.Alert {
+	COLOR: #ff0000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.greeb {
+	COLOR: green;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.txtborder{
+border:1px solid #ffffff;
+border-collapse:collapse;
+}
+
+
+#menu {
+margin : 0;
+height : 32px;
+padding-top : 0;
+}
+#menu li {
+list-style : none;
+display : inline;
+line-height : 35px;
+}
+#menu li a {
+text-decoration : none;
+margin : 0;
+padding : 9px 15px 10px 15px;
+font-weight : bold;
+color : #fff;
+}
+#menu li a:hover {
+color : #fff;
+background : #326F8F;
+margin : 0;
+}
+#menu li a.current {
+background : #616161 url(images/trcorner.gif) no-repeat top right;
+color : #fff;
+}
+
+.FeatureBlockHeader {
+	BORDER-RIGHT: #ff9900 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #ff9900 1px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: 13px; PADDING-BOTTOM: 2px; TEXT-TRANSFORM: uppercase; BORDER-LEFT: #ff9900 1px solid; COLOR: #990000; PADDING-TOP: 2px; BORDER-BOTTOM: #ff9900 1px solid; FONT-FAMILY: Arial,Verdana; WHITE-SPACE: nowrap; BACKGROUND-COLOR: #ffe0b3
+}
+
+
+.FeatureBlockContent {
+	BORDER-RIGHT: #ff9900 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ff9900 1px; PADDING-LEFT: 5px; FONT-SIZE: 11px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; OVERFLOW: hidden; BORDER-LEFT: #ff9900 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #ff9900 1px solid; TEXT-OVERFLOW: ellipsis; BACKGROUND-COLOR: #fffaf2
+}
+
+
+.paratext {
+FONT-FAMILY: Arial, Helvetica, verdana;
+color:#0066cc;
+FONT-SIZE: 12px;
+LINE-HEIGHT: 16px;
+}
+
+.Partext1 {
+FONT-SIZE: 12px; LINE-HEIGHT: 17px; FONT-FAMILY: Arial, Helvetica, verdana
+}
+
+
+
+.headertext {
+FONT-FAMILY: verdana;
+font-size:15px;
+color:#000000;
+letter-spacing:0.1em;
+}
+.BlueBoxheader {
+	BORDER-RIGHT: #ff9900 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #ff9900 1px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: 13px; PADDING-BOTTOM: 2px; TEXT-TRANSFORM: uppercase; BORDER-LEFT: #ff9900 1px solid; COLOR: #990000; PADDING-TOP: 2px; BORDER-BOTTOM: #ff9900 1px solid; FONT-FAMILY: Arial,Verdana; WHITE-SPACE: nowrap; BACKGROUND-COLOR: #ffe0b3
+}
+
+
+.GreenBox {
+	BORDER-RIGHT: #8FCDEE 1px solid; 
+	PADDING-RIGHT: 5px; 
+	BORDER-TOP: #8FCDEE 1px solid; 
+	PADDING-LEFT: 5px; FONT-SIZE: 11px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; OVERFLOW: hidden; BORDER-LEFT: #8FCDEE 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #8FCDEE 1px solid; TEXT-OVERFLOW: ellipsis; BACKGROUND-COLOR: #8FCDEE
+}
+
+
+.lightBlueborder {
+	BORDER-RIGHT:#00CCFF 1px solid; 
+	PADDING-RIGHT: 5px; 
+	BORDER-TOP: #00CCFF 1px solid; 
+	PADDING-LEFT: 5px; FONT-SIZE: 11px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; OVERFLOW: hidden; BORDER-LEFT: #00CCFF 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #00CCFF 1px solid; TEXT-OVERFLOW: ellipsis
+}
+
+#ads {
+	position:absolute;
+	left:816px;
+	top:5px;
+	width:153px;
+	height:100%px;
+	z-index:1;
+	background-color:#FAFAFA;
+	
+}
+
+.forminput {
+	font-family: Arial, Helvetica, verdana;
+	font-size: 11px;
+}
+
+.formselect {
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: verdana
+}
+
+H3 {
+	FONT-SIZE: 13px; MARGIN-BOTTOM: 10px; COLOR: #000
+}
+
+.Text1 {
+	FONT-SIZE: 12px;  FONT-FAMILY: "Trebuchet MS", Trebuchet, Verdana, Arial, verdana; BORDER-COLLAPSE: collapse
+}
+
+
+.HeadText1 {
+	FONT-SIZE: 12px;  FONT-FAMILY: "Trebuchet MS", Trebuchet, Verdana, Arial, verdana; BORDER-COLLAPSE: collapse
+}
+
+
+P {
+	FONT-SIZE: 11px; COLOR: #333; LINE-HEIGHT: 14px; FONT-FAMILY: "Trebuchet MS", Trebuchet, Verdana, Arial, verdana
+}
+
+
+#GLOBE {
+MARGIN: 0px auto; WIDTH: 100%; TEXT-ALIGN: left;
+}
+
+INPUT.text-short {
+	WIDTH: 175px; HEIGHT: 20px
+}
+
+
+
+A:link {
+	COLOR: #FF6633; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #0066cc; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #FF0000; TEXT-DECORATION: none
+}
+A.mn {
+	COLOR: white; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+A.mn:hover {
+	COLOR: white; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+A.mn:active {
+	COLOR: red; FONT-FAMILY: verdana,arial; TEXT-DECORATION: underline
+}
+A.mn:visited {
+	COLOR: white; FONT-FAMILY: verdana,arial
+}
+A.mns {
+	COLOR: white; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+
+.mediumwhiteboldlink {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: arial; TEXT-DECORATION: none
+}
+
+.subheadertxtblack {
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 12px; 
+	TEXT-TRANSFORM: none; 
+	COLOR: #000000; 
+	FONT-STYLE: normal; 
+	FONT-FAMILY: Verdana, Helvetica, sans-serif; 
+	TEXT-DECORATION: none
+}
+
+.subheadertxtblack a{
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 12px; 
+	TEXT-TRANSFORM: none; 
+	COLOR: #000000; 
+	FONT-STYLE: normal; 
+	FONT-FAMILY: Verdana, Helvetica, sans-serif; 
+	TEXT-DECORATION: none
+}
+
+A.Darkblue {
+COLOR: #006FB1; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+
+A.Darkblue:hover {
+	COLOR:#006FB1; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+A.Darkblue:visited {
+	COLOR: #006FB1; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+
+.Lightbluedes {
+COLOR:#006FB1; font-size:11px; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none
+}
+
+
+A.Lightblue {
+COLOR:#006FB1; font-size:12px; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none; line-height:18px; margin-left: 10px;
+}
+
+A.Lightblue:hover {
+	COLOR:#006FB1; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none; margin-left: 10px;
+}
+A.Lightblue:visited {
+	COLOR: #333333; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none; margin-left: 10px;
+}
+
+
+A.mns:hover {
+	COLOR: white; FONT-FAMILY: verdana,arial; TEXT-DECORATION: underline
+}
+
+A.mns:active {
+	COLOR: red; FONT-FAMILY: verdana,arial; TEXT-DECORATION: underline
+}
+A.mns:visited {
+	COLOR: white; FONT-FAMILY: verdana,arial; TEXT-DECORATION: underline
+}
+A.menu:link {
+	COLOR: #0066cc; TEXT-DECORATION: underline
+}
+A.menu:visited {
+	COLOR: #0066cc; TEXT-DECORATION: underline
+}
+A.menu:hover {
+	COLOR: #6699ff; TEXT-DECORATION: none
+}
+
+SELECT {
+	FONT-SIZE: 10pt; COLOR: black; FONT-FAMILY: verdana,arial
+}
+TD {
+	FONT-SIZE: 9pt; FONT-FAMILY: verdana,arial,helvetica
+}
+.d_desc {
+	FONT-SIZE: 8pt; FONT-FAMILY: verdana,arial,helvetica
+}
+.fld1 {
+	FONT-SIZE: 9pt; FONT-FAMILY: verdana; BACKGROUND-COLOR: #f0f9ff; xborder: 1pt solid
+}
+
+.smalltextgrey {
+font-family:verdana;
+font-size:11px;
+color:#000000;
+}
+.smalltextgrey a{
+font-family:verdana;
+font-size:11px;
+color:#000000;
+}
+
+.smalltextgrey a:hover{
+font-family:verdana;
+font-size:11px;
+color:#f00;
+}
+
+.smalltextred {
+font-family:verdana;
+font-size:11px;
+color:#FF0000;
+
+}
+
+.error {
+	/* font-style: italic;  */
+	color: #333333;
+	font-family: "Trebuchet MS",Trebuchet,Verdana,Arial,verdana;
+	/* font-size: 11px; */
+	line-height: 14px;
+	padding-left: 10px;
+}
+
+HR {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; MARGIN: 10px 0px; WIDTH: 100%; COLOR: #c3cfdb; HEIGHT: 1px; BACKGROUND-COLOR: #c3cfdb; BORDER-RIGHT-WIDTH: 0px
+}
+
+
+.textsmallwhite {
+	font:'Times New Roman', Times, serif;color:#FFFFFF; 
+}
+
+
+.green-button {
+	font-family: Arial,verdana;
+	font-size: 11px;
+	font-weight: normal;
+	color: #FFFFFF;
+	background-color:#3C7999;
+	border: 1px solid #3C7999;
+}
+
+.H1Text {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE:13px;PADDING-BOTTOM: 0px; PADDING-TOP: 0px;
+	color:#CC3300;FONT-FAMILY: Arial, Helvetica, verdana;
+}
+
+.blackbox {
+		
+		border: 1px solid #EBEBEB;
+		padding: 0px;
+}
+
+.greybox {
+		
+		border: 1px solid #EBEBEB;
+		padding: 0px;
+}
+
+.line1 {
+		
+		
+		padding: 0px;
+		BORDER-BOTTOM: 1px solid #C3C3C3 ;
+		
+}
+
+
+.big_text
+{ font-size:16px; } 
+
+.form-field {
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555555;
+	display: block;
+	font-size: 14px;
+	line-height: 1.42857;
+	padding: 4px 10px;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	vertical-align: middle;
+}
+
+select.form-field {
+	width:278px;
+	font-family: "Trebuchet MS",Trebuchet,Verdana,Arial,verdana;
+}
+
+select.error {
+	border:1px solid #FF0000;
+}
+
+#errorContainer {
+	display: none;
+	overflow: auto;
+	background-color: #FFDDDD;
+	border: 1px solid #FF2323;
+	margin: 10px;
+	padding: 10px;
+}
+
+#errorContainer label {
+	float: none;
+	width: auto;
+}
+
+input.error {
+	border: 1px solid #FF2323;
+}
+
+.style1 { font-size: large; }
+
+.errorMessage {
+	font-family: "Trebuchet MS",Trebuchet,Verdana,Arial,verdana;
+	font-size: 11px;
+	color: #FF2323;
+}
+
+div.errorContainer {
+	display: block;
+	overflow: auto;
+	background-color: #FFDDDD;
+	border: 1px solid #FF2323;
+	margin: 10px;
+	padding: 10px;
+}
+
+.hawbHeader {
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #B20000;
+}
+
+.addHawbItemButton {
+	cursor:pointer;
+	display: inline-block;
+	background-color: #B20000;
+	font-size: 12;
+	font-weight: bold;
+	color: #ffffff;
+	margin-right: 10px;
+	padding: 2px 2px;
+}
+
+.removeHawbItemButton {
+	cursor:pointer;
+	display: inline-block;
+	background-color: #B20000;
+	font-size: 12;
+	font-weight: bold;
+	color: #ffffff;
+	padding: 3px 3px;
+}
+
+#divStatusMessage {
+	background-color: #E0E0D1;
+	padding: 10px 20px;
+	border: 1px dashed #43433F;
+}

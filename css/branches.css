@@ -1,0 +1,133 @@
+.stationContainer {
+			width           : 970px;
+			height          : 1375px;
+			background: rgba(32, 43, 36, 0.3);
+			margin-top      : 5px;
+
+		}
+		.manilaStationContainer {
+			width           : 461px;
+			height          : 370px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			border-radius   : 8px;
+			margin-right    : 10px;
+			margin-top      : 15px;
+			overflow        : hidden;
+		}
+		.zamboangaStationContainer {
+			width           : 461px;
+			height          : 370px;
+			background-color: #EAEAEA;
+			margin-top      : 15px;
+			display         : inline-block;
+			border-radius   : 8px;
+			overflow        : hidden;
+		}
+		.cagayanStationContainer {
+			width           : 461px;
+			height          : 370px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			margin-right    : 10px;
+			margin-top      : 15px;
+			overflow        : hidden;
+			border-radius   : 8px;
+		}
+		.butuanStationContainer {
+			width           : 461px;
+			height          : 370px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			margin-top      : 15px;
+			overflow        : hidden;
+			border-radius   : 8px;
+		}
+		.cebuStationContainer {
+			width           : 461px;
+			height          : 270px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			margin-right    : 10px;
+			margin-top      : 15px;
+			overflow        : hidden;
+			border-radius   : 8px;
+		}
+		.tagbilaranStationContainer {
+			width           : 461px;
+			height          : 270px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			margin-top      : 15px;
+			overflow        : hidden;
+			border-radius   : 8px;
+		}
+		.davaoStationContainer {
+			width           : 936px;
+			height          : 275px;
+			background-color: #EAEAEA;
+			display         : inline-block;
+			margin-bottom   : 15px;
+			margin-top      : 15px;
+			border-radius   : 8px;
+			overflow        : hidden;
+		}
+		.manilaStationContainer div>span, .cebuStationContainer div>span, .tagbilaranStationContainer div>span, .davaoStationContainer div>span, .cagayanStationContainer div>span, .zamboangaStationContainer div>span, .butuanStationContainer div>span {
+			width               : 130px;
+			height              :30px; 
+			/*	background-color: #4F4F4F; */
+			color               : #575757;
+			text-align          : left;
+			padding-left        : 3px;
+			padding-right       : 3px;
+			vertical-align      : middle;
+			display             : inline-block;
+			margin              : 3px 0px 3px 0px;
+			font-size           : 10pt;
+			font-weight         : bold;
+			margin-top: -4px;
+		}
+		.manilaStationContainer>div, .zamboangaStationContainer>div, .cebuStationContainer>div, .cagayanStationContainer >div, .butuanStationContainer >div, .tagbilaranStationContainer >div {
+			width       : 95%;
+			height      : 85%;
+			margin-top  : 10px;
+			padding-left: 7px;
+			display     : inline-block;
+			overflow    : hidden;
+			margin-left : 25px;
+		}
+		.davaoStationContainer>div{
+			width       : 936px;
+			height      : 85%;
+			margin-top  : 10px;
+			display     : inline-block;
+			overflow    : hidden;
+			margin-left : 15px;
+		}
+		.manilaStationContainer div>span:hover, .zamboangaStationContainer div>span:hover, .cebuStationContainer div>span:hover, .cagayanStationContainer div>span:hover, .butuanStationContainer div>span:hover, .tagbilaranStationContainer div>span:hover, .davaoStationContainer div>span:hover {
+			cursor         : pointer;
+			color          : #ff2222;
+			font-size      : 10.3pt;
+		}
+		h5 {
+			width           : 461px;
+			height          : 30px;
+			background-color: #616161;
+			color           : #ffffff;
+			text-align      : center;
+			margin-top      : 0px;
+			margin-bottom   : 3px;
+			line-height     : 1.5;
+			font-size       : 13pt;
+		}
+		.davaoStationContainer>h5 {
+			width           : 936px;
+			height          : 30px;
+			background-color: #616161;
+			color           : #ffffff;
+			text-align      : center;
+			margin-top      : 0px;
+			margin-bottom   : 3px;
+			line-height     : 1.5;
+			font-size       : 13pt;
+		}

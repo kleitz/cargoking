@@ -1,0 +1,34 @@
+.footer {
+			width                     : 970px;
+			height                    : 60px;
+			background-color          : #1F1F1F;
+			border-top                : 3px solid #F40000;
+			color                     : #FFFFFF;
+			margin-bottom             : 20px;
+			border-bottom-left-radius : 8px;
+			border-bottom-right-radius: 8px;
+			margin-top                : 7px;
+			font-size                 : 12px;
+			font-family               : 'OpenSanRegular'
+		}
+		.footerspan {
+			margin-top : 20px;
+			text-align : center;
+			margin-left: 120px;
+		}
+		.footerlogo {
+			float       : right;
+			margin-right: 10px;
+			margin-top  : 10px;
+		}
+		.status {
+			font-size: 13pt;
+			width: 60px;
+			height: 60px;
+			background-color: #ffffff;
+			color: #333333;
+		}
+		.fixed {
+			position: fixed;
+			top: 0;
+		}

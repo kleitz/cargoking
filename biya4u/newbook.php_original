@@ -1,0 +1,1350 @@
+<?php 
+include('protect.php');
+include 'dbconnect.php'; 
+ include('paging.class.php');
+ session_start();
+$login=$_SESSION['adminusername'];
+  function salt($table,$name)
+  {
+	  
+	  $query=mysqli_query($conn, "select * from  ".$table." order by category Asc ");
+	  ?>
+      <select name="<?=$name?>" id="<?=$name?>" style="width:250px;">
+
+	  <option value="">--select--</option>
+	  <?php
+	  while($row=mysqli_fetch_assoc($query))
+	  {
+		  ?>
+          <option value="<?=$row['id']?>"><?=$row['category']?></option>
+          <?php
+		  
+	  }
+	  
+	  ?> </select><?php
+	  
+	  
+  }
+  
+  $weight='';
+ 
+ if($_POST['submit'])
+ {	
+	$login=$_SESSION['adminusername'];
+  
+ 	$manju=explode('-',$_POST['date']);
+ 	
+	$customer=mysqli_real_escape_string($conn, $_POST['customer']);
+	
+	$sendername=mysqli_real_escape_string($conn, $_POST['sendername']);
+	
+	$senderaddress=mysqli_real_escape_string($conn, $_POST['senderaddress']);
+	
+	$senderphone=mysqli_real_escape_string($conn, $_POST['senderphone']);
+ 
+ 	$sendercity=mysqli_real_escape_string($conn, $_POST['sendercity']);
+	
+	$sendertin=mysqli_real_escape_string($conn, $_POST['sendertin']);
+	
+	$origin=mysqli_real_escape_string($conn, $_POST['origin']);
+	
+	$destination=mysqli_real_escape_string($conn, $_POST['destination']);
+	
+	$receiver=mysqli_real_escape_string($conn, $_POST['receiver']);
+	
+	$radd=mysqli_real_escape_string($conn, $_POST['radd']);
+	 
+	 $rcity=$_POST['rcity'];
+	
+	$rphone=mysqli_real_escape_string($conn, $_POST['rphone']);
+	
+	$modpay=mysqli_real_escape_string($conn, $_POST['modpay']);
+	
+	$move=mysqli_real_escape_string($conn, $_POST['move']);
+	
+	$sermode=mysqli_real_escape_string($conn, $_POST['sermode']);
+	
+	$des=mysqli_real_escape_string($conn, $_POST['des']);
+	
+	$delarea=$_POST['delarea'];
+		
+ 	 $tyship=$_POST['tyship'];
+	 
+	 $qun=$_POST['qun'];
+	 
+	 $length=$_POST['length'];
+	 
+	 $width=$_POST['width'];
+	 
+	 $height=$_POST['height'];
+	 
+	 $weight=$_POST['weight'];
+	 
+	 $total=$_POST['total'];
+	 
+	 $totalweight=$_POST['total_wei'];
+	 
+	 $dc=$_POST['dc'];
+ 
+	 $rando1=rand();
+	 
+	 $date=$manju[2]."-".$manju[1]."-".$manju[0];
+	 
+	 $ran_query=mysqli_query($conn, "select * from booking where rando='$rando'");
+	 
+	 $status=$_POST['status'];
+	 
+	 if(mysqli_num_rows($ran_query)>0)
+	 {
+		 $rando=rand();
+	 }
+	 else
+	 {
+		 $rando= $rando1;
+	 }
+
+	 if($customer=='')
+	 {
+		 $customer1="Please Select the Customer Name";
+		 $ok=1;
+	 }
+	 
+	
+	 
+	 if( $ok!==1)
+	 {	
+	 	
+		
+	 
+	 	if($_SESSION['member']=="User")
+		{
+			$series=getAssociativeArrayFromSQL($conn, "select * from user where username='$login'");
+			$hawbnum=$series['hawbfrom'] + $series['hawbcount']+ 1;
+			if( ($hawbnum <= $series['hawbto']) && ($hawbnum >= $series['hawbfrom']) )
+			{
+				$hawb=$series['hawbprefix'].$hawbnum;
+				$bno=$hawb;
+				$query=mysqli_query($conn, "insert into booking(customer,sendername,senderaddress,senderphone,sendercity,sendertin,origin,destination,receiver,radd,rphone,modpay,movement,servicemode,des,rando,date,status,deliveryarea,postby)values('$customer','$sendername','$senderaddress','$senderphone','$sendercity','$sendertin','$origin','$destination','$receiver','$radd','$rphone','$modpay','$move','$sermode','$des','$rando','$date','$status','$delarea','$login')") or die("error");
+				$update=mysqli_query($conn, "update booking set bookno='$hawb' where rando='$rando'");
+				$hbct=$series['hawbcount']+ 1;
+				$uphawb=mysqli_query($conn, "update user set hawbcount='$hbct' where username='$login'");
+			}
+			else
+				echo ("<script>alert('Your HAWB Number Limit Expired.. Please Contact Administrator');</script>");
+		}
+		else
+		{
+		$query=mysqli_query($conn, "insert into booking(customer,sendername,senderaddress,senderphone,sendercity,sendertin,origin,destination,receiver,radd,rphone,modpay,movement,servicemode,des,rando,date,status,deliveryarea,postby)values('$customer','$sendername','$senderaddress','$senderphone','$sendercity','$sendertin','$origin','$destination','$receiver','$radd','$rphone','$modpay','$move','$sermode','$des','$rando','$date','$status','$delarea','$login')") or die("error");
+		$pf_query=mysqli_query($conn, "select * from booking");
+		 $pf_row=mysqli_fetch_assoc($pf_query);
+		$pf=$pf_row['pfx'];
+		
+		$select=mysqli_query($conn, "select * from booking where rando='$rando'");
+		
+		$select_fet=mysqli_fetch_assoc($select);
+		
+		$bno=$pf.$select_fet['id'];
+		 
+		 $update=mysqli_query($conn, "update booking set bookno='$bno' where rando='$rando'");
+		 }
+		 
+	if($update)
+	{
+		
+		for($i=0;$i<count($weight);$i++)
+		{
+		$query1=mysqli_query($conn, "insert into arr(bookid,tyship,qun,length,width,height,weight,at) values('$bno','$tyship[$i]','$qun[$i]','$length[$i]','$width[$i]','$height[$i]','$weight[$i]',$dc[$i])");			
+		}
+		$rs=mysqli_query($conn, "insert into arr(bookid,total_weight,tot) values('$bno','$totalweight','$total')");
+		
+				$from = "Cargo King";
+					$to =  "admin@cargoking.com.ph";
+					//$to =  "himalaya@aalphanet.co.in";
+					
+					$subject = "A New HAWB is Inserted by ".$login; 
+					$message = "
+<html>
+
+		<table width=96% align=center >
+
+<tr bgcolor=#0171D5>
+
+<td height=140 bgcolor=#FFFFFF class=powerh>
+<p>Dear Admin,</p>
+<p>HAWB No : ".$bno." is Inserted by ".$login."</p>
+<p>To view details Please Login to Cargo King Admin</p>
+</td>
+
+</tr>
+
+</table>
+
+</html>";
+						
+						$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$headers .= 'From:'.$from."\r\n"
+					.'Reply-To:' .$from."\r\n";	
+					
+				$success = mail($to,$subject, $message, $headers); 
+		
+		?>
+		<script type="text/javascript">
+        
+		self.location="book_success.php?bo=<?=$bno?>&idd=<?=$select_fet['id']?>";
+		       
+        </script>
+		<?php
+		
+	}
+	
+		 
+	 }
+	 
+	 
+ }
+ 
+ 
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" type="text/css"  rel="stylesheet"/>
+
+<title>Admin</title>
+<style type="text/css">
+<!--
+.style1 {font-size: large;}
+-->
+</style>
+<script type="text/JavaScript">
+<!--
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+    
+    
+  <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    
+
+    
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+  $("#customer").keyup(function(){
+	   
+    txt=$("#customer").val();
+	
+    $("#min1").show();
+	
+    $.post("cus1.php",{suggest:txt},function(result){
+      $("#min1").html(result);
+	  
+	  
+    });
+  });
+  
+  $("#destination").change(function(){
+	   
+    txt=$("#destination").val();
+	
+    $.post("city.php",{suggest:txt},function(result){
+      $("#city").html(result);
+	  
+	  
+    });
+  });
+
+
+  
+  $("#suc").validate({
+			
+			rules: {
+				bookno: {
+					required:true,
+					remote: "check.php"
+				},
+				rcustomer:
+				{
+					required:true
+				},
+				receiver:
+				{
+					required:true
+				},
+				<?php
+				if($_SESSION['member']=='User')
+				{
+				?>
+				hawb:
+				{
+					required:true
+				},
+				<?php
+				}
+				?>
+				radd:
+				{
+					required:true
+				},
+				rcity:
+				{
+					required:true
+				},
+				rphone:
+				{
+					required:true
+				},
+				bookingpl:
+				{
+					required:true
+				},
+				customer:
+				{
+					required:true
+				},
+				desarea:
+				{
+					required:true
+				},
+				modpay:
+				{
+				required:true
+				},
+				move:
+				{
+				required:true
+				},
+				sermode:
+				{
+				required:true
+				},
+				tyship:
+				{
+				required:true
+				}
+				 /*,
+				 des:
+				 {
+					required:true 
+				 }*/
+				
+			},
+			
+			messages: {
+				bookno: {
+					required:"Please Enter the HAWB No",
+					remote: "HAWB No Already Exist"
+					
+				},
+				rcustomer:
+				{
+					required:"Please Enter the Customer Id"
+				},
+				receiver:
+				{
+					required:"Please Enter the Consignee Name"
+				},
+				rcity:
+				{
+					required:"Please Enter the Consignee City"
+				},
+				rphone:
+				{
+					required:"Please Enter the Consignee Phone"
+				},
+				radd:
+				{
+					required:"Please Enter the Consignee Address"	
+				},
+				bookingpl:
+				{
+					required:"Please Select the Booking Place"
+				},
+				customer:
+				{
+					required:"Please Select the Customer"
+				},
+				desarea:
+				{
+					required:"Please Select the Destination Area"
+				},
+				modpay:
+				{
+				required:"Please Select the Mode of Payment"
+				},
+				move:
+				{
+				required:"Please Select the Type of Movement"
+				},
+				sermode:
+				{
+				required:"Please Select the Service Mode"
+				},
+				tyship:
+				{
+				required:"Please Select the Type of Shipment"
+				},
+				des:
+				{
+					required:"Please Enter the Description"
+				}
+			}
+		});
+  
+  
+});
+</script>
+
+<script type="text/javascript">
+function delcity()
+{
+	txt=$("#rcity").val();
+    txt1=$("#destination").val();
+    $.post("delarea.php",{suggest:txt,sug:txt1},function(result){
+      $("#delarea").html(result); 
+    });
+}
+function lam(a)
+{
+	
+	
+	document.getElementById("rcustomer").value=a;
+	document.getElementById("min").style.display="none";
+	
+	
+}
+
+
+function lam1(a)
+{
+	
+	
+	document.getElementById("customer").value=a;
+	document.getElementById("min1").style.display="none";
+	
+	
+}
+
+</script>
+
+</head>
+
+<body>
+
+<style type="text/css">
+
+.ds_box {
+	background-color: #FFF;
+	border: 1px solid #000;
+	position: absolute;
+	z-index: 32767;
+}
+
+.ds_tbl {
+	background-color: #FFF;
+}
+
+.ds_head {
+	background-color: #333;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.ds_subhead {
+	background-color: #CCC;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 32px;
+}
+
+.ds_cell {
+	background-color: #EEE;
+	color: #000;
+	font-size: 13px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.ds_cell:hover {
+	background-color: #F3F3F3;
+} /* This hover code won't work for IE */
+
+</style>
+ 
+<table class="ds_box" cellpadding="0" cellspacing="0" id="ds_conclass" style="display: none;"> 
+  <tr> 
+    <td id="ds_calclass"> </td> 
+  </tr> 
+</table> 
+<script type="text/javascript">
+// <!-- <![CDATA[
+
+// Project: Dynamic Date Selector (DtTvB) - 2006-03-16
+// Script featured on JavaScript Kit- http://www.javascriptkit.com
+// Code begin...
+// Set the initial date.
+var ds_i_date = new Date();
+ds_c_month = ds_i_date.getMonth() + 1;
+ds_c_year = ds_i_date.getFullYear();
+
+// Get Element By Id
+function ds_getel(id) {
+	return document.getElementById(id);
+}
+
+// Get the left and the top of the element.
+function ds_getleft(el) {
+	var tmp = el.offsetLeft;
+	el = el.offsetParent
+	while(el) {
+		tmp += el.offsetLeft;
+		el = el.offsetParent;
+	}
+	return tmp;
+}
+function ds_gettop(el) {
+	var tmp = el.offsetTop;
+	el = el.offsetParent
+	while(el) {
+		tmp += el.offsetTop;
+		el = el.offsetParent;
+	}
+	return tmp;
+}
+
+// Output Element
+var ds_oe = ds_getel('ds_calclass');
+// Container
+var ds_ce = ds_getel('ds_conclass');
+
+// Output Buffering
+var ds_ob = ''; 
+function ds_ob_clean() {
+	ds_ob = '';
+}
+function ds_ob_flush() {
+	ds_oe.innerHTML = ds_ob;
+	ds_ob_clean();
+}
+function ds_echo(t) {
+	ds_ob += t;
+}
+
+var ds_element; // Text Element...
+
+var ds_monthnames = [
+'January', 'February', 'March', 'April', 'May', 'June',
+'July', 'August', 'September', 'October', 'November', 'December'
+]; // You can translate it for your language.
+
+var ds_daynames = [
+'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+]; // You can translate it for your language.
+
+// Calendar template
+function ds_template_main_above(t) {
+	return '<table cellpadding="3" cellspacing="1" class="ds_tbl">'
+	     + '<tr>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_py();">&lt;&lt;</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_pm();">&lt;</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_hi();" colspan="3">[Close]</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_nm();">&gt;</td>'
+		 + '<td class="ds_head" style="cursor: pointer" onclick="ds_ny();">&gt;&gt;</td>'
+		 + '</tr>'
+	     + '<tr>'
+		 + '<td colspan="7" class="ds_head">' + t + '</td>'
+		 + '</tr>'
+		 + '<tr>';
+}
+
+function ds_template_day_row(t) {
+	return '<td class="ds_subhead">' + t + '</td>';
+	// Define width in CSS, XHTML 1.0 Strict doesn't have width property for it.
+}
+
+function ds_template_new_week() {
+	return '</tr><tr>';
+}
+
+function ds_template_blank_cell(colspan) {
+	return '<td colspan="' + colspan + '"></td>'
+}
+
+function ds_template_day(d, m, y) {
+	return '<td class="ds_cell" onclick="ds_onclick(' + d + ',' + m + ',' + y + ')">' + d + '</td>';
+	// Define width the day row.
+}
+
+function ds_template_main_below() {
+	return '</tr>'
+	     + '</table>';
+}
+
+// This one draws calendar...
+function ds_draw_calendar(m, y) {
+	// First clean the output buffer.
+	ds_ob_clean();
+	// Here we go, do the header
+	ds_echo (ds_template_main_above(ds_monthnames[m - 1] + ' ' + y));
+	for (i = 0; i < 7; i ++) {
+		ds_echo (ds_template_day_row(ds_daynames[i]));
+	}
+	// Make a date object.
+	var ds_dc_date = new Date();
+	ds_dc_date.setMonth(m - 1);
+	ds_dc_date.setFullYear(y);
+	ds_dc_date.setDate(1);
+	if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
+		days = 31;
+	} else if (m == 4 || m == 6 || m == 9 || m == 11) {
+		days = 30;
+	} else {
+		days = (y % 4 == 0) ? 29 : 28;
+	}
+	var first_day = ds_dc_date.getDay();
+	var first_loop = 1;
+	// Start the first week
+	ds_echo (ds_template_new_week());
+	// If sunday is not the first day of the month, make a blank cell...
+	if (first_day != 0) {
+		ds_echo (ds_template_blank_cell(first_day));
+	}
+	var j = first_day;
+	for (i = 0; i < days; i ++) {
+		// Today is sunday, make a new week.
+		// If this sunday is the first day of the month,
+		// we've made a new row for you already.
+		if (j == 0 && !first_loop) {
+			// New week!!
+			ds_echo (ds_template_new_week());
+		}
+		// Make a row of that day!
+		ds_echo (ds_template_day(i + 1, m, y));
+		// This is not first loop anymore...
+		first_loop = 0;
+		// What is the next day?
+		j ++;
+		j %= 7;
+
+	}
+	// Do the footer
+	ds_echo (ds_template_main_below());
+	// And let's display..
+	ds_ob_flush();
+	// Scroll it into view.
+	ds_ce.scrollIntoView();
+}
+
+// A function to show the calendar.
+// When user click on the date, it will set the content of t.
+function ds_sh(t) {
+	// Set the element to set...
+	ds_element = t;
+	// Make a new date, and set the current month and year.
+	var ds_sh_date = new Date();
+	ds_c_month = ds_sh_date.getMonth() + 1;
+	ds_c_year = ds_sh_date.getFullYear();
+	// Draw the calendar
+	ds_draw_calendar(ds_c_month, ds_c_year);
+	// To change the position properly, we must show it first.
+	ds_ce.style.display = '';
+	// Move the calendar container!
+	the_left = ds_getleft(t);
+	the_top = ds_gettop(t) + t.offsetHeight;
+	ds_ce.style.left = the_left + 'px';
+	ds_ce.style.top = the_top + 'px';
+	// Scroll it into view.
+	ds_ce.scrollIntoView();
+}
+
+// Hide the calendar.
+function ds_hi() {
+	ds_ce.style.display = 'none';
+}
+
+// Moves to the next month...
+function ds_nm() {
+	// Increase the current month.
+	ds_c_month ++;
+	// We have passed December, let's go to the next year.
+	// Increase the current year, and set the current month to January.
+	if (ds_c_month > 12) {
+		ds_c_month = 1; 
+		ds_c_year++;
+	}
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the previous month...
+function ds_pm() {
+	ds_c_month = ds_c_month - 1; // Can't use dash-dash here, it will make the page invalid.
+	// We have passed January, let's go back to the previous year.
+	// Decrease the current year, and set the current month to December.
+	if (ds_c_month < 1) {
+		ds_c_month = 12; 
+		ds_c_year = ds_c_year - 1; // Can't use dash-dash here, it will make the page invalid.
+	}
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the next year...
+function ds_ny() {
+	// Increase the current year.
+	ds_c_year++;
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Moves to the previous year...
+function ds_py() {
+	// Decrease the current year.
+	ds_c_year = ds_c_year - 1; // Can't use dash-dash here, it will make the page invalid.
+	// Redraw the calendar.
+	ds_draw_calendar(ds_c_month, ds_c_year);
+}
+
+// Format the date to output.
+function ds_format_date(d, m, y) {
+	// 2 digits month.
+	m2 = '00' + m;
+	m2 = m2.substr(m2.length - 2);
+	// 2 digits day.
+	d2 = '00' + d;
+	d2 = d2.substr(d2.length - 2);
+	// YYYY-MM-DD
+	return  d2 + '-' + m2 + '-'+ y;
+}
+
+// When the user clicks the day.
+function ds_onclick(d, m, y) {
+	// Hide the calendar.
+	ds_hi();
+	// Set the value of it, if we can.
+	if (typeof(ds_element.value) != 'undefined') {
+		ds_element.value = ds_format_date(d, m, y);
+	// Maybe we want to set the HTML in it.
+	} else if (typeof(ds_element.innerHTML) != 'undefined') {
+		ds_element.innerHTML = ds_format_date(d, m, y);
+	// I don't know how should we display it, just alert it to user.
+	} else {
+		alert (ds_format_date(d, m, y));
+	}
+}
+
+function getSelected(opt)
+ {
+ 
+ 	var opt=document.frmExport.opt;
+            for (var intLoop = 0; intLoop < opt.length; intLoop++)
+			 {
+			  if (!(opt.options[intLoop].selected))
+			   {
+			   		alert("Select any one field!");
+					return false;
+               }
+		    }
+			return true;           
+  }
+
+// And here is the end.
+
+// ]]> -->
+</script> 
+<div align="center">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"  align="center">
+  
+  <tr>
+    
+	<td>
+	<table width="900" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF" >
+  <tr>
+    <td width="187"><?php include('adminheader.php') ?>	</td>
+  </tr>
+  <tr>
+    <td ><p align="center" class="style1">New HAWB</p>
+        <span class="">
+       
+        </span>
+        
+        
+        
+        
+        
+        
+       <form action="" method="post" name="suc" id="suc" onSubmit="return suy();">  <table width="826" align="center">
+         
+            <!--<tr>
+              <td>HAWB No</td>
+              <td><input type="text" name="bookno" id='cat2' style="width:255px;" value="<?=$_POST['bookno']?>"/>
+                <span class="Alert">
+                <?=$bookno1?>
+                </span></td>
+             
+              
+            </tr>-->
+            
+            
+            
+            <tr>
+              <td>Date</td>
+              <td>
+              <input type="text" name="date" id='date' style="width:255px;" value="<?php echo date("d-m-Y");?>" readonly="readonly" onClick="ds_sh(this);"/>
+
+                <span class="Alert">
+                <?=$bookno1?>
+                </span></td>
+             
+              
+            </tr>
+            <tr>
+              <td width="238"><strong>Choose Shipper</strong></td>
+              <td width="562">
+              
+         
+              
+              <!--<select name="rcustomer" style="width:255px;" id="rcustomer">
+                <option value="">--Select--</option>
+                
+                <?php
+				while($cus_row=mysqli_fetch_assoc($cus_query))
+				{
+					?>
+					
+					<option value="<?=$cus_row['cusid']?>"><?=$cus_row['name']?>-<?=$cus_row['cusid']?></option>
+					
+					<?php
+					
+				}
+				?>
+                
+              </select>-->      
+              <input type="text" name="customer" id="customer" style="width:250px;"  autocomplete="off"/>
+              <script type="text/javascript">
+			  function fun()
+			  {
+				  document.getElementById('cus').style.display="block";
+				  
+				  document.getElementById('hide').style.display="block";
+				  
+			  }
+			  function fun1()
+			  {
+				  document.getElementById('cus').style.display="none";
+				  
+				   document.getElementById('hide').style.display="none";
+				  
+			  }
+			  </script>
+              
+               <span class="Alert">
+              <?=$customer1?>
+              <!--<a href="#" onclick="MM_openBrWindow('customer.php ','','scrollbars=yes,left=100,top=0,width=1000,height=1000');" >-->
+              
+              <a href="#cus" onClick="fun()">Add New Customer</a></span></td>
+              <td width="10" class="Alert">&nbsp;</td>
+              
+            </tr>
+            </table> <ul id="min1" style=" position:absolute;  display:none; width:250px; max-height:500px;background: #008040; margin:-5px 0 0 310px; border:1px solid #959595; padding:5px; line-height:25px; list-style:none;"align="center"></ul>
+            <table width="826" align="center" id="new" >
+            
+            
+            
+            <tr>
+              <td  width="237">Shipper's Name</td><td width="560">
+            
+            <input type="text" value="" name="sendername" style="width:255px;" readonly/>
+            
+            
+            </td> <td width="13" class="Alert">&nbsp;</td>
+            </tr>
+            
+            <tr>
+              <td>Address</td><td>
+            
+            <textarea name="Shipperaddress" style="width:255px;" readonly></textarea>
+              </td> <td width="13" class="Alert">&nbsp;</td>
+            </tr>
+              
+              
+               <tr>
+                 <td>Phone</td>
+                 <td>
+            
+            <input type="text" value="" name="senderphone" style="width:255px;" readonly/>
+            
+            
+            </td> <td width="13" class="Alert">&nbsp;</td>
+               </tr>
+            
+            
+            
+            
+            
+            
+             <tr>
+                 <td>City</td>
+                 <td>
+            
+            <input type="text" value="" name="sendercity" style="width:255px;" readonly/>
+            
+            
+            </td> <td width="13" class="Alert">&nbsp;</td>
+             </tr>
+            
+            <tr>
+                 <td>TIN</td>
+                 <td>
+            
+            <input type="text" value="" name="sendertin" style="width:255px;" readonly/>
+            
+            
+            </td> <td width="13" class="Alert">&nbsp;</td>
+            </tr>
+            
+            
+            
+            
+            </table>
+            
+             
+            
+           
+            
+            
+            <table width="826" align="center">
+            
+            <tr>
+              <td width="233">Origin</td>
+              <?php if($login=="admin") { ?>
+              <td width="566">
+              
+              <?php salt("bplace","origin"); ?>
+              
+                <span class="Alert">
+                <?=$bookingpl1?>
+                </span></td> <? }
+				else { 
+				$tab_name=strtolower($_SESSION['member']);
+				if($tab_name=="stationadmin")
+					$use=getAssociativeArrayFromSQL($conn, "select * from station where username='$login'");
+				else
+					$use=getAssociativeArrayFromSQL($conn, "select * from ".$tab_name." where username='$login'");
+				$use_city=$use['city'];
+					$origin=getAssociativeArrayFromSQL($conn, "select * from bplace where id='$use_city'");
+				?>
+                <td width="566">
+              <input type="text" name="originvalue" id="originvalue" readonly="readonly" value="<?=$origin['category'];?>" style="width:255px;" />
+              <input type="hidden" name="origin" id="origin" value="<?=$use['city'];?>" />
+              
+                <span class="Alert">
+                <?=$bookingpl1?>
+                </span></td> <?php } ?>
+              <td width="11" class="Alert">&nbsp;</td>
+              
+            </tr>
+            <tr>
+              <td width="233">Destination</td>
+              <td width="566">
+              
+              <?php salt("bplace","destination"); ?>
+              
+                <span class="Alert">
+                <?=$bookingpl1?>
+                </span></td>
+              <td width="11" class="Alert">&nbsp;</td>
+              
+            </tr>
+            </table>
+            
+            
+            <table width="826" align="center" id="new1" >
+            
+            
+             <tr>
+                 <td>City / Delivery Area</td>
+                 <td><div id="city">
+            <select name="rcity" id="rcity" style="width:250px" onChange="delcity()">
+            	<option value="">--Select--</option>
+            </select></div>
+            
+            
+            </td> <td width="68" class="Alert">&nbsp;</td></tr>
+            
+             <tr>
+                 <td>Connecting Route</td>
+                 <td><div id="city">
+            <input type="radio" name="croute" id="croute" value="1" />Yes &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" name="croute" id="croute" value="2" />No</div>
+            
+            
+            </td> <td width="68" class="Alert">&nbsp;</td></tr>
+            
+            <tr>
+            
+            <tr>
+              <td  width="234">Consignee's Name<strong> </strong> </td>
+              <td width="508">
+            
+            <input type="text" value="" name="receiver" style="width:255px;" />
+            
+            
+            </td> <td width="68" class="Alert">&nbsp;</td></tr>
+            
+            <tr>
+              <td>Address</td><td>
+            
+            <textarea name="radd" style="width:255px;" ></textarea>
+              </td> <td width="68" class="Alert">&nbsp;</td></tr>
+             
+                 <td>Phone</td>
+                 <td>
+            
+            <input type="text" value="" name="rphone" style="width:255px;" />
+            
+            
+            </td> <td width="68" class="Alert">&nbsp;</td></tr>
+             </table >
+              
+           <table align="center">
+           <div id="delarea"></div>
+           <!--<tr>
+              <td width="235">Delivery Area</td>
+              <td width="507"><div id="delarea"><input type="text" name="delarea" id="delarea" style="width:250px;" /></div>
+                </td>
+              <td width="68" class="Alert">&nbsp;</td>
+              
+            </tr>-->
+            <tr>
+              <td width="235">Mode of Payment</td>
+              <td width="507">                
+                <?php salt("mop","modpay"); ?>
+                
+                <span class="Alert">
+                  <?=$modpay1?>
+                  </span></td>
+              <td width="68" class="Alert">&nbsp;</td>
+              
+            </tr>
+            <tr>
+              <td width="235">Type of Movement</td>
+              <td width="507">                
+                <?php salt("movement","move"); ?>
+                
+                <span class="Alert">
+                  <?=$modpay1?>
+                  </span></td>
+              <td width="68" class="Alert">&nbsp;</td>
+              
+            </tr>
+            <tr>
+              <td width="235">Service Mode</td>
+              <td width="507">                
+                <?php salt("servicemode","sermode"); ?>
+                
+                <span class="Alert">
+                  <?=$modpay1?>
+                  </span></td>
+              <td width="68" class="Alert">&nbsp;</td>
+              
+            </tr>
+            <tr>
+              <td width="235">Status</td>
+              <td width="507">                
+                <?php salt("status","status"); ?>
+                </td>
+              <td width="68" class="Alert">&nbsp;</td>
+              
+            </tr>
+            </table>
+            
+            <table width="873" align="center" id="new">
+           <tr>
+             <td width="201" height="27" align="center" valign="middle" bgcolor="#e72020" style=""><strong>Cargo Description</strong></td>
+             <td width="90" align="center" valign="middle" bgcolor="#e72020"><strong>No. of Pieces</strong></td>
+             <td width="219" align="center" valign="middle" bgcolor="#e72020"><strong>Measurement</strong></td> 
+             <td width="189" align="center" valign="middle" bgcolor="#e72020"><strong>Weight(Kilo)</strong></td>
+             <td width="150" align="center" valign="middle" bgcolor="#e72020"><strong>Declared Value</strong></td>
+           </tr>
+            
+           <script type="text/javascript">
+			  function zoho(val,q,to)
+			  {
+				  
+				   
+				   
+				 document.getElementById(to).value=document.getElementById(val).value*document.getElementById(q).value
+				  
+			  }
+			   
+			   
+			   function removeed(ido)
+			   {
+				   var numo=ido-1;
+				   
+				   var aja=numo+"btn";
+				  
+				   document.getElementById(aja).style.display="inline";
+				 
+				  var t="weight"+ido;
+				  
+				  document.getElementById('total_wei').value=document.getElementById('total_wei').value - document.getElementById(t).value;	
+				  wei=document.getElementById('total_wei').value;
+				  weii=document.getElementById('delarea').value;
+				  route=document.getElementById('croute').checked;
+				  $.get("total_calc.php",{suggest:wei,area:weii,croute:route},function(result){
+      				$("#total").html(result);
+    				});  
+				  
+				  var el = document.getElementById(ido);
+				  
+				  
+					var remElement = (el.parentNode).removeChild(el);
+				  
+			   }
+			   function neo(str)
+			   {
+					document.getElementById(str).style.display="none";
+				}
+			   
+			   
+			  </script>
+            <tr id="0">
+              <td>
+              
+              <?php $ty_query=mysqli_query($conn, "select * from  ty_ship order by id desc"); 
+			  
+			  $success='';
+			  ?>
+              
+              
+              
+              <select name="tyship[]" style="width:200px;">
+                <option value="">--Select--</option>
+                
+                <?php
+				while($ty_row=mysqli_fetch_assoc($ty_query))
+				{
+					?>
+					
+					<option value="<?=$ty_row['id']?>"><?=$ty_row['category']?></option>
+					<?php 
+					
+					$success.="<option value='".$ty_row['id']."'>".$ty_row['category']."</option>"; 
+					
+					?>
+					<?php 
+					
+					
+				}
+				?>
+              </select>              </td>
+              <td align="center">
+                    
+              
+              
+              <input type="text" name="qun[]" id="qun" size="3" />              </td>
+              <td>
+              
+              
+             <!--<input type="text" name="price[]" id='price'   value="" style="text-align: center;" /> --> 
+             <input type="text" name="length[]" id="length" size="2" style="text-align:center;"  onClick="this.value='';" onBlur="this.value=!this.value?'Length':this.value;" value="Length" /> 
+              <input type="text" name="width[]" id="width" size="2" style="text-align:center;"  onClick="this.value='';" onBlur="this.value=!this.value?'Width':this.value;" value="Width" /> 
+               <input type="text" name="height[]" id="height" size="2" style="text-align:center;"  onClick="this.value='';" onBlur="this.value=!this.value?'Height':this.value;" value="Height" /> 
+               <input type="text" name="dimtot" id="dimtot" size="2" readonly="readonly" onFocus="weical(0)" />           </td>
+              <td><h3>
+                <input type="text" name="weight[]" id='weight' class="tot" value="" style=" width:120px;text-align: center;"/>
+                <input type="hidden" name="val" value="0" id="val" />
+                
+                
+                
+               </h3></td>
+              <td> <input type="text" name="dc[]" id='dc' class="dc" value="" style="width:100px;text-align: center;"/> <span id="0btn" style="cursor:pointer;" onClick="mine(0);neo('0btn');"><strong>+</strong></span></td>
+            </tr>
+            </table>
+            
+            
+            
+            
+            <table id="myList" width="873" align="center"></table>
+			<table width="873" align="center">
+            <tr>
+            <td colspan="2" style="padding-right:50px;">Total Weight:<input type="text" name="total_wei" id="total_wei" border="0" style="border:none; text-align:right; width:75px; font-weight:bold;" readonly="readonly" value="0"/></td>
+            <td><input type="button" name="calcluate" value="Calculate" onClick="calbut()" /></td>
+              <td colspan="2" align="right" style="padding-right:50px;" id="total">Total Charges:<input type="text" name="total" id="total" border="0" style="border:none; text-align:right; width:75px; font-weight:bold;" readonly="readonly" value="0"/></td>
+              </tr></table>
+<script>
+	
+	function calbut()
+	{
+		
+		if(document.getElementById('length').value == "" || document.getElementById('length').value== "Length") {
+			document.getElementById("length").readOnly = true;
+			document.getElementById("width").readOnly = true;
+			document.getElementById("height").readOnly = true;
+	 	}
+		else
+		{
+			var cal = document.getElementById('length').value * document.getElementById('width').value * document.getElementById('height').value;
+			document.getElementById('dimtot').value = document.getElementById('length').value * document.getElementById('width').value * document.getElementById('height').value;
+			var x=(cal/3500);
+			document.getElementById('weight').value=Math.round(x);
+			document.getElementById("weight").readOnly = true;
+		}
+		
+		wei=document.getElementById('weight').value;
+		
+		count=document.getElementById('val').value;
+		
+		for(i=1;i<=count;i++)
+		{
+			t="weight"+i;
+			l="length"+i;
+			w="width"+i;
+			h="height"+i;
+			dt="dimtot"+i;
+			if(document.getElementById(l).value == "" || document.getElementById(l).value== "Length") {
+				document.getElementById(l).readOnly = true;
+				document.getElementById(w).readOnly = true;
+				document.getElementById(h).readOnly = true;
+	 		}
+			else
+			{
+				len=document.getElementById(l).value;
+				wid=document.getElementById(w).value;
+				hei=document.getElementById(h).value;
+			var cal= len * wid * hei ;
+			document.getElementById(dt).value = document.getElementById(l).value * document.getElementById(w).value * document.getElementById(h).value;
+		
+			var y=(cal/3500);
+			document.getElementById(t).value=Math.round(y);
+			document.getElementById(t).readOnly = true;
+			}
+			temp=document.getElementById(t).value;
+			wei = parseFloat(wei) + parseFloat(temp);
+		}
+			document.getElementById('total_wei').value=wei;
+			route=document.getElementById('croute').checked;
+			var weii=$('input[name="delarea"]').val();
+				  $.get("total_calc.php",{suggest:wei,area:weii,croute:route},function(result){
+      			$("#total").html(result);
+    		});
+	}
+	
+	function weical(str)
+	{
+		if(document.getElementById('length').value == "" || document.getElementById('length').value== "Length") {
+			document.getElementById("length").readOnly = true;
+			document.getElementById("width").readOnly = true;
+			document.getElementById("height").readOnly = true;
+	 	}
+		else
+		{
+			var cal = document.getElementById('length').value * document.getElementById('width').value * document.getElementById('height').value;
+			document.getElementById('dimtot').value = document.getElementById('length').value * document.getElementById('width').value * document.getElementById('height').value;
+			var x=(cal/3500);
+			document.getElementById('weight').value=Math.round(x);
+			document.getElementById("weight").readOnly = true;
+		}
+		
+		wei=document.getElementById('weight').value;
+		
+		var sud=str+1;
+		for(i=1;i<sud;i++)
+		{
+			t="weight"+i;
+			l="length"+i;
+			w="width"+i;
+			h="height"+i;
+			dt="dimtot"+i;
+			if(document.getElementById(l).value == "" || document.getElementById(l).value== "Length") {
+				document.getElementById(l).readOnly = true;
+				document.getElementById(w).readOnly = true;
+				document.getElementById(h).readOnly = true;
+	 		}
+			else
+			{
+			cal=document.getElementById(l).value * document.getElementById(w).value * document.getElementById(h).value;
+			document.getElementById(dt).value = document.getElementById(l).value * document.getElementById(w).value * document.getElementById(h).value;
+		
+			var y=(cal/3500);
+			document.getElementById(t).value=Math.round(y);
+			document.getElementById(t).readOnly = true;
+			}
+			temp=document.getElementById(t).value;
+			wei = parseFloat(wei) + parseFloat(temp);
+		}
+		
+			document.getElementById('total_wei').value=wei;
+			route=document.getElementById('croute').checked;
+			  weii=$('input[name="hiddeninput"]').val();
+				  $.get("total_calc.php",{suggest:wei,area:weii,croute:route},function(result){
+      			$("#total").html(result);
+    		});
+	}
+	
+	function mine(str)
+	{
+	
+	var sud=str+1;	
+	
+	var nam="<?php echo $success; ?>";
+	
+	var qun='qun'+sud;
+	
+	var tot="tot"+sud;
+	
+	var pri='price'+sud;
+	
+	var btn=sud+'btn'
+	
+	$("#myList").append('<tr id="'+sud+'"><td width="206"><select name="tyship[]" style="width:200px;"><option value="">--Select--</option>'+nam+'</select></td><td width="90" align="center"><input type="text" name="qun[]" id="qun" size="3" /></td><td width="260"><input type="text" name="length[]" id="length'+sud+'" size="2" onClick="this.value=\'\';" onBlur="this.value=!this.value?\'Length\':this.value;" value="Length" style="text-align: center;"><input type="text" size="2" name="width[]" id="width'+sud+'" onClick="this.value=\'\';" onBlur="this.value=!this.value?\'Width\':this.value;" value="Width" style="text-align: center;"><input type="text" size="2" name="height[]" id="height'+sud+'" onClick="this.value=\'\';" onBlur="this.value=!this.value?\'Height\':this.value;" value="Height" style="text-align: center;"><input type="text" size="2" name="dimtot" id="dimtot'+sud+'" onfocus="weical('+sud+')"  /></td><td width="137"><input type="text" name="weight[]" id="weight'+sud+'" class="tot" value="" style=" width:120px;text-align: center;"/></td><td width="171"><input type="text" name="dc[]" id="'+sud+'dc" class="dc" value="" style=" width:100px;text-align: center;"><span id="'+sud+'btn" style="cursor:pointer;" onclick=mine('+sud+');neo("'+btn+'");>+</span>&nbsp;&nbsp;&nbsp;<span style="cursor:pointer;" onClick="removeed('+sud+')">-</span></td></tr>');
+	
+	document.getElementById('val').value=sud;
+	
+	}
+ 
+</script>
+
+            <table width="826" align="center" id="new">
+             <tr>
+              <td width="202">Remarks / Notations</td>
+              <td width="592"><textarea cols="40" rows="5" name="des"></textarea></td>
+              <td width="10">&nbsp;</td><td width="10">&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="202"></td>
+              <td width="592"><input type="submit" name="submit" value="Submit" /><input type="reset" name="reset" value="Reset" /></td>
+              <td width="10">&nbsp;</td><td width="10">&nbsp;</td>
+            </tr>
+          
+        </table></form></td>
+  </tr>
+
+  <tr><td align="right"><a href="#" onClick="fun1()" id="hide">Hide</a></td></tr>
+  <tr><td ><iframe src="customer.php" scrolling="auto" width="980" height="500" id="cus" style="display:none;"></iframe></td>
+  </tr>
+  
+<tr>
+    <td><?php include('adminfooter.php') ?></td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table></div>
+</body>
+</html>

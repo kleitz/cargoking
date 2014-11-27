@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DSTI Building (Map)</title>
+	<link href="biya4u/css/style.css" type="text/css" rel="stylesheet"/>
+    <style>
+      h1 {
+      	font-family: "OpenSanRegular";
+
+      }
+      #map_canvas {
+        width: 800px;
+        height: 400px;
+        background-color: #ddd;
+        border: 5px solid #1A1F24;
+        border-radius: 10px;
+        display: inline-block;
+      }
+      .mainContainer {
+      	width: 1200px;
+      }
+      .branchContainers {
+      	border: 5px solid #1A1F24;
+      	width: 200px;
+      	height: 400px;
+      	overflow-y: auto;
+      	display: inline-block;
+      	margin-right: 10px;
+      	background-color: #ddd;
+      }
+      span.branch {
+      	font-family: "OpenSanRegular";
+      	font-size: 12px;
+      	font-weight: bold;
+      	color: #003366;
+      	padding: 10px;
+      	display: block;
+      }
+      span.branch:hover {
+      	color: #1A1F24;
+      	background-color: #8099B2;
+      }
+      div > span.branch:not(:last-child) {
+      	border-bottom: 1px dashed #999;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="biya4u/js/jquery-1.11.1.min.js"></script>
+	<script>
+		/* START: Initialize map */
+		var defaultLocation = new google.maps.LatLng(7.102010, 125.614683);
+		var map;
+		/* END: */
+
+		$(document).ready(function(){
+			initializeMap();
+		});
+
+		var initializeMap = function() {
+			var mapCanvas = document.getElementById('map_canvas');
+			var mapOptions = {
+				center: defaultLocation, //new google.maps.LatLng(7.102010, 125.614683),
+				zoom: 12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			map = new google.maps.Map(mapCanvas, mapOptions);
+
+			/* START: Setup Markers */
+			var mrkDsti = new google.maps.Marker({
+				position: new google.maps.LatLng(7.102010, 125.614683),
+				map: map,
+				title: 'John Gold Group of Companies, DSTI Building, Watusi St., Buhangin'
+			});
+			var mrkAbreeza = new google.maps.Marker({
+				position: new google.maps.LatLng(7.091087, 125.611312),
+				map: map,
+				title: 'Cargo King Abreeza Branch'
+			});
+			var mrkGGrandIlustre = new google.maps.Marker({
+				position: new google.maps.LatLng(7.069388,125.606227),
+				map: map,
+				title: 'Cargo King Gaisano Grand Ilustre Davao Branch'
+			});
+			var mrkGmallBajada = new google.maps.Marker({
+				position: new google.maps.LatLng(7.077896, 125.614086),
+				map: map,
+				title: 'Cargo King Gaisano Mall Davao Branch'
+			});
+			var mrkNcccMall = new google.maps.Marker({
+				position: new google.maps.LatLng(7.062734,125.593696),
+				map: map,
+				title: 'Cargo King NCCC Mall Davao Branch'
+			});
+			var mrkSMPremier = new google.maps.Marker({
+				position: new google.maps.LatLng(7.098886, 125.630866),
+				map: map,
+				title: 'Cargo King SM Premier Davao Branch'
+			});
+			var mrkSMDavao = new google.maps.Marker({
+				position: new google.maps.LatLng(7.049616, 125.587975),
+				map: map,
+				title: 'Cargo King SM Davao Branch'
+			});
+			var mrkVPDavao = new google.maps.Marker({
+				position: new google.maps.LatLng(7.086365, 125.611645),
+				map: map,
+				title: 'Cargo King Victoria Plaza Davao Branch'
+			});
+			/* END */
+		};
+
+		var loadBranchLocation = function(branchId){
+
+			//send JSON request that will query the latitude and longitude of selected branch by sending branch id as parameter
+			//Once you get the LAT & LONG, center the map using these values, also zoom the map to focus the branch location.
+
+			var location;
+			var zoom = 15;
+			if(branchId == 0){
+				//All CK
+				location = new google.maps.LatLng(7.102010, 125.614683);
+				zoom = 12;
+			}
+			else if(branchId == 1){
+				//Abreeza
+				location = new google.maps.LatLng(7.102010, 125.614683);
+			}
+			else if(branchId == 2){
+				//Abreeza
+				location = new google.maps.LatLng(7.091087, 125.611312);
+			}
+			else if(branchId == 3){
+				//Gaisano Grand Ilustre
+				location = new google.maps.LatLng(7.069388,125.606227);
+			}
+			else if(branchId == 4){
+				//GMALL
+				location = new google.maps.LatLng(7.077896, 125.614086);
+			} 
+			else if(branchId == 5){
+				//NCCC Mall
+				location = new google.maps.LatLng(7.062734,125.593696);
+			} 
+			else if(branchId == 6){
+				//SM Premier
+				location = new google.maps.LatLng(7.098886, 125.630866);
+			} 
+			else if(branchId == 7){
+				//SM Davao
+				location = new google.maps.LatLng(7.049616, 125.587975);
+			} 
+			else if(branchId == 8){
+				//Victoria Plaza
+				location = new google.maps.LatLng(7.086365, 125.611645);
+			}
+
+			if(map && location){
+				//set map center and zoom
+				map.setCenter(location);
+				map.setZoom(zoom);
+			}
+		};
+	</script>
+</head>
+<body>
+	<div class="mainContainer" align="center">
+		<h1>DSTI Building Map</h1>
+		<div class="branchContainers" align="left">
+			<span class="branch" onclick="loadBranchLocation(0);">All Cargo King Davao</span>
+			<span class="branch" onclick="loadBranchLocation(2);">ABREEZA Davao</span>
+			<span class="branch">Boulevard Davao</span>
+			<span class="branch">Buhangin Davao</span>
+			<span class="branch">Claveria Davao</span>
+			<span class="branch">DIA Lanang Davao</span>
+			<span class="branch" onclick="loadBranchLocation(1);">John Gold HQ Davao</span>
+			<span class="branch">Ecoland Matina Davao</span>
+			<span class="branch" onclick="loadBranchLocation(3);">Gaisano Grand Davao</span>
+			<span class="branch" onclick="loadBranchLocation(4);">GMALL Davao</span>
+			<span class="branch">Mintal Davao</span>
+			<span class="branch" onclick="loadBranchLocation(5);">NCCC Mall Davao</span>
+			<span class="branch" onclick="loadBranchLocation(7);">SM Davao</span>
+			<span class="branch" onclick="loadBranchLocation(6);">SM Premier Lanang Davao</span>
+			<span class="branch">Toril Davao</span>
+			<span class="branch" onclick="loadBranchLocation(8);">Victoria Plaza Davao</span>
+			<span class="branch">Uyanguren Davao</span>
+			<span class="branch">Apokon Tagum</span>
+			<span class="branch">Gaisano Grand Tagum</span>
+			<span class="branch">GMALL Tagum</span>
+			<span class="branch">NCCC Mall Tagum</span>
+		</div>
+		<div id="map_canvas"></div>
+	</div>
+</body>
+</html>

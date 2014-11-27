@@ -1,0 +1,34 @@
+2013-12-16 18:12:56: <br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\frame_3.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrspec.php</b> on line <b>568</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_0\mask_29_0.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_1\mask_29_1.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_2\mask_29_2.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_3\mask_29_3.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_4\mask_29_4.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_5\mask_29_5.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_6\mask_29_6.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />
+<br />
+<b>Warning</b>:  mkdir() [<a href='function.mkdir'>function.mkdir</a>]: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>154</b><br />
+<br />
+<b>Warning</b>:  file_put_contents(G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\cache\mask_7\mask_29_7.dat) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory in <b>G:\xampp\htdocs\himalaya\cargo_king\biya4u\qrlib\qrmask.php</b> on line <b>155</b><br />

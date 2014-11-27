@@ -1,0 +1,1 @@
+alter table booking_status add column satellite_office_id integer(11);

@@ -1,0 +1,1 @@
+alter table mop add column remarks text;

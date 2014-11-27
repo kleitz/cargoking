@@ -1,0 +1,539 @@
+<?php include('protect.php');
+include 'dbconnect.php'; 
+include "qrlib/qrlib.php";
+$id=$_GET['ed'];
+$root=$_SERVER['HTTP_HOST'];
+
+$result = getAssociativeArrayFromSQL($conn, "SELECT * FROM booking where id='$id'"); 
+
+function salt1($table,$id)
+  {
+	  $query=mysqli_query($conn, "select * from  ".$table." where id='$id'");
+	 
+	  while($row=mysqli_fetch_assoc($query))
+	  {
+		 
+      return stripslashes($row['category']);
+		  
+	  }
+		 
+  }
+ ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" type="text/css"  rel="stylesheet" media="print"/>
+
+<head><title>Admin</title>
+
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.1.min.js" > </script> 
+<script type="text/javascript">
+    function PrintElem(elem)
+    {
+        Popup($(elem).html());
+    }
+</script>
+<style type="text/css">
+	body{
+		font-size:11px;
+		font-family:Arial, Helvetica, sans-serif;
+	}
+	.small
+	{
+		font-family:"Times New Roman", Times, serif;
+		font-size:9px;
+	}
+</style>
+</head>
+
+<body style="background:#FFF;" onload="window.print();">
+
+	<table cellpadding="0" cellspacing="0" style="width:842px; height:595px; border:thick #999999;">
+    	<tr>
+        	<td width="30%" height="225" align="center" valign="top"><img src="images/logo.png" border="0" />
+       	 <!-- <span class="small">Cargo Terminal buidling 1, Davao International Airport Cabatian Road, Buhangin, Davao City II Tele/Fax 082 300-8088</span>-->
+       	  <table cellpadding="0" width="100%" cellspacing="0" border="1" style="margin-top:19px;">
+            	<tr>
+                	<td width="60%" align="center"><strong>SERVICE MODE</strong></td>
+                    <td width="40%" align="center"><strong>MOVEMENT</strong></td>
+                </tr>
+                <tr>
+                	<td height="75" valign="top">
+           	     	<?php
+						$result1=mysqli_query($conn, "select * from servicemode");
+							while($sermode=mysqli_fetch_array($result1))
+								{
+									if($sermode['id'] == $result['servicemode'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$sermode['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$sermode['category']."<br>");
+								}
+                    ?>
+                  </td>
+      <td>
+                    	<?php
+						$result1=mysqli_query($conn, "select * from movement");
+							while($move=mysqli_fetch_array($result1))
+								{
+									if($move['id'] == $result['movement'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$move['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$move['category']."<br>");
+								}
+                    ?>
+                    </td>
+                </tr>
+            </table>
+          </td>
+          <td width="70%" valign="top"><strong>IMPORTANT:</strong><BR />
+          WE WILL BE LIABLE TO THE EXTENT OF THE DECLARED VALUE ON THE FACE OF THIS WAYBILL, CLAIMS NOT FILED WITHIN (30) DAYS AFTER DATE OF THIS WAYBILL ARE DEEMED WAIVED BY THE SHIPPER.<br />
+          
+          	<table border="1" cellpadding="1" cellspacing="0" width="100%" height="173">
+            	<tr>
+                	<td width="30%">DATE &nbsp;&nbsp; <?=$result['date']?></td>
+                    <td width="70%">SHIPPER: &nbsp;&nbsp; <strong><?=$result['sendername']?></strong></td>
+                </tr>
+                <tr>
+                	<td width="30%">ORIGIN &nbsp;&nbsp; <strong><?php echo salt1("bplace",$result['origin']); ?></strong></td>
+                    <td width="70%">ADDRESS: &nbsp;&nbsp; <?=$result['senderaddress']?></td>
+                </tr>
+                <tr>
+                	<td width="30%">DESTINATION &nbsp;&nbsp; <strong><?php echo salt1("bplace",$result['destination']); ?></strong></td>
+                    <td width="70%">TIN: &nbsp;&nbsp; <?=$result['sendertin']?></td>
+                </tr>
+                <tr>
+                	<td width="30%" align="center"><strong>PAYMENT MODE</strong></td>
+                    <td width="70%">CONTACT NO: &nbsp;&nbsp; <?=$result['senderphone']?></td>
+                </tr>
+                <tr>
+                	<td width="30%" rowspan="3" align="left" valign="top">
+                    	<?php
+						$result1=mysqli_query($conn, "select * from mop");
+							while($modpay=mysqli_fetch_array($result1))
+								{
+									if($modpay['id'] == $result['modpay'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$modpay['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$modpay['category']."<br>");
+								}
+                    ?>
+                    </td>
+                    <td width="70%" height="28">CONSIGNEE: &nbsp;&nbsp; <strong><?=$result['receiver']?></strong></td>
+                </tr>
+                <tr>
+                	<td width="70%" height="28">ADDRESS: &nbsp;&nbsp; <strong><?=$result['radd']?><br /><span style="padding-left:63px;"><?=$result['rcity']?></span></strong></td>
+                </tr>
+                <tr>
+                	<td width="70%">CONTACT NO: &nbsp;&nbsp; <strong><?=$result['rphone']?></strong></td>
+                </tr>
+          </table></td>
+      </tr>
+      <tr>
+      	<td height="74" colspan="2" valign="top">
+<table cellpadding="0" cellspacing="0" border="1" width="100%">
+            	<tr>
+                	<th>NUMBER OF PIECES</th>
+                    <TH>CARGO DESCRIPTION</TH>
+                    <TH>MEASUREMENT<BR />L x W x H (CBM)</TH>
+                    <TH>WEIGHT(KILO)</TH>
+                    <TH>DECLARED VALUE</TH>
+                </tr>
+                <tr height="175">
+                	<td valign="top" align="center" style="padding:5px;">
+                    	<p>
+                    	  <?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['qun']."<br>");
+								}
+						?>
+               	    </p>
+                    	<p>&nbsp;</p>
+                   	<p>FREIGHT CHARGE</p>
+                   	<p>VALUATION CHARGE</p>
+                    <p>WAYBILL FEE</p>
+                    <p>FUEL SURCHARGE</p>
+                    <p>INSURANCE FEE</p>
+                    <p>SPECIAL HANDLING FEE</p>
+                    <p>PICK-UP & DELIVERY</p>
+                    <p>OTHERS</p>
+                    <p>SUB TOTAL</p>
+                    <p>VAT</p>
+                    <p></p>
+                   	<p>&nbsp;</p></td>
+                   <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										{
+											echo salt1("ty_ship",$arr['tyship']);
+											echo "<br>";
+										}
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+									{
+										$total=$arr['length'] * $arr['width'] * $arr['height'];
+										echo ($total."<br>");
+									}
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['weight']."<br>");
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['at']."<br>");
+								}
+						?>
+                    </td>
+                </tr>
+                <tr>
+                	<td style="padding:5px;"><strong>REMARKS / NOTATIONS</strong></td>
+                    <TD colspan="2" style="padding:5px;"><?=$result['des']?></TD>
+                    <TD style="padding:5px;"><strong>TOTAL CHARGES</strong></TD>
+                    <TD style="padding:5px;"><?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']=='0')
+										echo ("<strong>".$arr['tot']."</strong><br>");
+								}
+						?></TD>
+                </tr>
+            </table>
+        </td>
+      </tr>
+      <tr>
+      	<td colspan="2">
+        	<table cellpadding="2" cellspacing="2" border="0" width="100%">
+            	<tr valign="top">
+                	<td width="35%">
+                    	<table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                            	<td style="padding:2px;">
+                                	THIS IS TO CERTIFY THAT THE SHIPMENT IS PROPERLY DESCRIBED AND IN GOOD CONDITION.<br /><br />
+                                    SHIPPER<BR />CONFORME: _____________________________
+                                    	<div style="text-align:center">SIGNATURE OVER PRINTED NAME</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="35%">
+                    	<table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                           	  <td style="padding:2px;">
+                                	 TO BE FILLED UP BY CARGO KING <strong>FOR PICK-UP ONLY</strong>
+                    <BR />
+                    TRUCKER NAME: _______________________________<BR />
+                    SIGNATURE:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; _______________________________<br />
+                    <BR />
+                    RECEIPT AT WHSE CHECKER:
+                              _____________________<div style="text-align:center">SIGNATURE OVER PRINTED NAME</div></td>
+                            </tr>
+                        </table>
+                       </td>
+                    <td width="15%"><table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                            	<td bgcolor="#000000" style="color:#FFFFFF; padding:5px; font-weight:bold; font-size:16px; padding:2px;" align="center">HAWB #</td>
+                            </tr>
+                            <tr>
+                            	<td style="padding:5px; font-weight:bold; font-size:16px;" align="center" valign="bottom" height="52">No  <?=$result['bookno']?></td>
+                            </tr>
+                        </table></td>
+                        <td width="10%" valign="bottom"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        	<tr valign="top">
+                                <td valign="bottom"><?php  
+								 
+								$tempDir = "qrtemp/";
+								
+								//$sta=getAssociativeArrayFromSQL($conn, "select category from status where id='".$result['status']."'");
+								 
+								 $codeContents="http://".$root."/tracking/biya4u/update_status.php?ed=".$result['id'];
+								 
+								//$codeContents = "HWAB NO: ".$result['bookno']."<br> Delivery Status: ".$sta['category'];
+								//echo $codeContents;
+								 
+								// we need to generate filename somehow,  
+								// with md5 or with database ID used to obtains $codeContents... 
+								$fileName = 'cargo'.md5($codeContents).'.png';
+								
+								$img=$tempDir.$fileName;
+								// generating 
+								 
+								// frame config values below 4 are not recomended !!! 
+								QRcode::png($codeContents, $img, QR_ECLEVEL_L, 3, 0);
+							
+								// displaying 
+								echo '<img src="'.$img.'" border="1" />';
+								
+								 ?></td>
+                            </tr>
+                        </table></td>
+                </tr>
+            </table>
+        </td>
+      </tr>
+      <tr><?php
+	  $des=$result['origin'];
+      	$sta_add=getAssociativeArrayFromSQL($conn, "select * from bplace where id=$des");
+	  ?>
+      	<td colspan="2"><strong><?=$sta_add['address'];?></strong></td>
+      </tr>
+    </table><br />
+<table cellpadding="0" cellspacing="0" style="width:842px; height:595px; border:thick #999999;">
+    	<tr>
+        	<td width="30%" height="225" align="center" valign="top"><img src="images/logo.png" border="0" />
+       	 <!-- <span class="small">Cargo Terminal buidling 1, Davao International Airport Cabatian Road, Buhangin, Davao City II Tele/Fax 082 300-8088</span>-->
+       	  <table cellpadding="0" width="100%" cellspacing="0" border="1" style="margin-top:19px;">
+            	<tr>
+                	<td width="60%" align="center"><strong>SERVICE MODE</strong></td>
+                    <td width="40%" align="center"><strong>MOVEMENT</strong></td>
+                </tr>
+                <tr>
+                	<td height="75" valign="top">
+           	     	<?php
+						$result1=mysqli_query($conn, "select * from servicemode");
+							while($sermode=mysqli_fetch_array($result1))
+								{
+									if($sermode['id'] == $result['servicemode'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$sermode['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$sermode['category']."<br>");
+								}
+                    ?>
+                  </td>
+      <td>
+                    	<?php
+						$result1=mysqli_query($conn, "select * from movement");
+							while($move=mysqli_fetch_array($result1))
+								{
+									if($move['id'] == $result['movement'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$move['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$move['category']."<br>");
+								}
+                    ?>
+                    </td>
+                </tr>
+            </table>
+          </td>
+          <td width="70%" valign="top"><strong>IMPORTANT:</strong><BR />
+          WE WILL BE LIABLE TO THE EXTENT OF THE DECLARED VALUE ON THE FACE OF THIS WAYBILL, CLAIMS NOT FILED WITHIN (30) DAYS AFTER DATE OF THIS WAYBILL ARE DEEMED WAIVED BY THE SHIPPER.<br />
+          
+          	<table border="1" cellpadding="1" cellspacing="0" width="100%" height="173">
+            	<tr>
+                	<td width="30%">DATE &nbsp;&nbsp; <?=$result['date']?></td>
+                    <td width="70%">SHIPPER: &nbsp;&nbsp; <strong><?=$result['sendername']?></strong></td>
+                </tr>
+                <tr>
+                	<td width="30%">ORIGIN &nbsp;&nbsp; <strong><?php echo salt1("bplace",$result['origin']); ?></strong></td>
+                    <td width="70%">ADDRESS: &nbsp;&nbsp; <?=$result['senderaddress']?></td>
+                </tr>
+                <tr>
+                	<td width="30%">DESTINATION &nbsp;&nbsp; <strong><?php echo salt1("bplace",$result['destination']); ?></strong></td>
+                    <td width="70%">TIN: &nbsp;&nbsp; <?=$result['sendertin']?></td>
+                </tr>
+                <tr>
+                	<td width="30%" align="center"><strong>PAYMENT MODE</strong></td>
+                    <td width="70%">CONTACT NO: &nbsp;&nbsp; <?=$result['senderphone']?></td>
+                </tr>
+                <tr>
+                	<td width="30%" rowspan="3" align="left" valign="top">
+                    	<?php
+						$result1=mysqli_query($conn, "select * from mop");
+							while($modpay=mysqli_fetch_array($result1))
+								{
+									if($modpay['id'] == $result['modpay'])
+										echo ("&nbsp;&nbsp;<img src='images/tickbox.jpg' border='0' align='absmiddle'> &nbsp; ".$modpay['category']."<br>");
+									else
+										echo ("&nbsp;&nbsp;<img src='images/checkbox.jpg' border='0' align='absmiddle'> &nbsp; ".$modpay['category']."<br>");
+								}
+                    ?>
+                    </td>
+                    <td width="70%" height="28">CONSIGNEE: &nbsp;&nbsp; <strong><?=$result['receiver']?></strong></td>
+                </tr>
+                <tr>
+                	<td width="70%" height="28">ADDRESS: &nbsp;&nbsp; <strong><?=$result['radd']?><br /><span style="padding-left:63px;"><?=$result['rcity']?></span></strong></td>
+                </tr>
+                <tr>
+                	<td width="70%">CONTACT NO: &nbsp;&nbsp; <strong><?=$result['rphone']?></strong></td>
+                </tr>
+          </table></td>
+      </tr>
+      <tr>
+      	<td height="74" colspan="2" valign="top">
+<table cellpadding="0" cellspacing="0" border="1" width="100%">
+            	<tr>
+                	<th>NUMBER OF PIECES</th>
+                    <TH>CARGO DESCRIPTION</TH>
+                    <TH>MEASUREMENT<BR />L x W x H (CBM)</TH>
+                    <TH>WEIGHT(KILO)</TH>
+                    <TH>DECLARED VALUE</TH>
+                </tr>
+                <tr height="175">
+                	<td valign="top" align="center" style="padding:5px;">
+                    	<p>
+                    	  <?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['qun']."<br>");
+								}
+						?>
+               	    </p>
+                   	<p>&nbsp;</p>
+                   	<p>FREIGHT CHARGE</p>
+                    <p>VALUATION CHARGE</p>
+                    <p>WAYBILL FEE</p>
+                    <p>FUEL SURCHARGE</p>
+                    <p>INSURANCE FEE</p>
+                    <p>SPECIAL HANDLING FEE</p>
+                    <p>PICK-UP &amp; DELIVERY</p>
+                    <p>OTHERS</p>
+                    <p>SUB TOTAL</p>
+                    <p>VAT</p>
+                   	<p>&nbsp;</p></td>
+                   <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										{
+											echo salt1("ty_ship",$arr['tyship']);
+											echo "<br>";
+										}
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+									{
+										$total=$arr['length'] * $arr['width'] * $arr['height'];
+										echo ($total."<br>");
+									}
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['weight']."<br>");
+								}
+						?>
+                    </td>
+                    <td valign="top" align="center" style="padding:5px;">
+                    	<?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']!='0')
+										echo ($arr['at']."<br>");
+								}
+						?>
+                    </td>
+                </tr>
+                <tr>
+                	<td style="padding:5px;"><strong>REMARKS / NOTATIONS</strong></td>
+                    <TD colspan="2" style="padding:5px;"><?=$result['des']?></TD>
+                    <TD style="padding:5px;"><strong>TOTAL CHARGES</strong></TD>
+                    <TD style="padding:5px;"><?php
+                        	$result1=mysqli_query($conn, "select * from arr where bookid='".$result['bookno']."'");
+								while($arr=mysqli_fetch_array($result1))
+								{
+									if($arr['weight']=='0')
+										echo ("<strong>".$arr['tot']."</strong><br>");
+								}
+						?></TD>
+                </tr>
+            </table>
+        </td>
+      </tr>
+      <tr>
+      	<td colspan="2">
+        	<table cellpadding="2" cellspacing="2" border="0" width="100%">
+            	<tr valign="top">
+                	<td width="35%">
+                    	<table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                            	<td style="padding:2px;">
+                                	THIS IS TO CERTIFY THAT THE SHIPMENT IS PROPERLY DESCRIBED AND IN GOOD CONDITION.<br /><br />
+                                    SHIPPER<BR />CONFORME: _____________________________
+                                    	<div style="text-align:center">SIGNATURE OVER PRINTED NAME</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="35%">
+                    	<table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                           	  <td style="padding:2px;">
+                                	 TO BE FILLED UP BY CARGO KING <strong>FOR PICK-UP ONLY</strong>
+                    <BR />
+                    TRUCKER NAME: _______________________________<BR />
+                    SIGNATURE:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; _______________________________<br />
+                    <BR />
+                    RECEIPT AT WHSE CHECKER:
+                              _____________________<div style="text-align:center">SIGNATURE OVER PRINTED NAME</div></td>
+                            </tr>
+                        </table>
+                       </td>
+                    <td width="15%"><table cellpadding="0" cellspacing="0" border="1" width="100%">
+                        	<tr valign="top">
+                            	<td bgcolor="#000000" style="color:#FFFFFF; padding:5px; font-weight:bold; font-size:16px; padding:2px;" align="center">HAWB #</td>
+                            </tr>
+                            <tr>
+                            	<td style="padding:5px; font-weight:bold; font-size:16px;" align="center" valign="bottom" height="52">No  <?=$result['bookno']?></td>
+                            </tr>
+                        </table></td>
+                        <td width="10%" valign="bottom"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        	<tr valign="top">
+                                <td valign="bottom"><?php echo '<img src="'.$img.'" border="1" />'; ?></td>
+                            </tr>
+                        </table></td>
+                </tr>
+            </table>
+        </td>
+      </tr>
+      <tr><?php
+	  $des=$result['origin'];
+      	$sta_add=getAssociativeArrayFromSQL($conn, "select * from bplace where id=$des");
+	  ?>
+      	<td colspan="2"><strong><?=$sta_add['address'];?></strong></td>
+      </tr>
+    </table>
+
+</body>
+</html>

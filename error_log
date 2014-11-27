@@ -1,0 +1,27 @@
+[16-Apr-2014 01:33:14 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[16-Apr-2014 01:33:14 America/New_York] PHP Notice:  Undefined offset: 2 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[16-Apr-2014 01:33:14 America/New_York] PHP Notice:  Undefined offset: 1 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[20-Apr-2014 12:45:52 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[21-Apr-2014 01:08:52 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[21-Apr-2014 02:20:27 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[21-Apr-2014 02:20:27 America/New_York] PHP Notice:  Undefined offset: 2 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[21-Apr-2014 02:20:27 America/New_York] PHP Notice:  Undefined offset: 1 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[21-Apr-2014 02:20:35 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[21-Apr-2014 02:20:35 America/New_York] PHP Notice:  Undefined offset: 2 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[21-Apr-2014 02:20:35 America/New_York] PHP Notice:  Undefined offset: 1 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[21-Apr-2014 02:20:50 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[21-Apr-2014 22:32:02 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 04:23:21 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 22:24:50 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 22:24:50 America/New_York] PHP Notice:  Undefined offset: 2 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[22-Apr-2014 22:24:50 America/New_York] PHP Notice:  Undefined offset: 1 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[22-Apr-2014 22:24:59 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 22:24:59 America/New_York] PHP Notice:  Undefined offset: 2 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[22-Apr-2014 22:24:59 America/New_York] PHP Notice:  Undefined offset: 1 in /home/ehi8so1c/public_html/tracking/trackshipment_status.php on line 89
+[22-Apr-2014 22:25:07 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 22:54:26 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[22-Apr-2014 23:02:49 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[23-Apr-2014 01:32:22 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[23-Apr-2014 01:50:53 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[23-Apr-2014 01:54:06 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5
+[23-Apr-2014 01:55:38 America/New_York] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/ehi8so1c/public_html/tracking/biya4u/dbconnect.php on line 5

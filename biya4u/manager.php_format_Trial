@@ -1,0 +1,313 @@
+<?php 
+	include('protect.php');
+	include 'dbconnect.php'; 
+	include('paging.class.php');
+	include('utilities.php');
+
+	session_start();
+	$type_code = $_SESSION['type_code'];
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" type="text/css"  rel="stylesheet"/>
+
+<title>Admin</title>
+<style type="text/css">
+<!--
+	.style1 {font-size: large;}
+
+	.form-field {
+		background-color: #FFFFFF;
+		border: 1px solid #CCCCCC;
+		border-radius: 4px;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+		color: #555555;
+		display: block;
+		font-size: 14px;
+		line-height: 1.42857;
+		padding: 4px 10px;
+		transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+		vertical-align: middle;
+		width: 100%;
+	}
+	select {
+		width:278px;
+		border:1px solid #CCCCCC;
+		-webkit-border-top-left-radius: 4px;
+		-webkit-border-bottom-left-radius: 4px;
+		-webkit-border-top-right-radius: 4px;
+		-webkit-border-bottom-right-radius: 4px;
+
+		-moz-border-radius-topleft: 4px;
+		-moz-border-radius-bottomleft: 4px;
+		-moz-border-radius-topright: 4px;
+		-moz-border-radius-bottomright: 4px;
+
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+
+		padding:2px;
+		font-size: 14px;
+		line-height: 1.42857;
+		color: #555555;
+		transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	}
+
+	#errorContainer {
+		display: none;
+		overflow: auto;
+		background-color: #FFDDDD;
+		border: 1px solid #FF2323;
+		margin: 10px;
+		padding: 10px;
+	}
+
+	#errorContainer label {
+		float: none;
+		width: auto;
+	}
+
+
+	input.error {
+		border: 1px solid #FF2323;
+	}
+-->
+</style>
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#user").validate({
+	rules: {
+		managerName: {
+			required:true
+		},
+		city: {
+			required:true
+		},
+		managerPhone: {
+			required:true
+		},
+		managerEmailAddress: {
+			required:true,
+			email:true
+		},
+		managerCode: {
+			required: true
+		},
+		managerUsername: {
+			required:true,
+			maxlength:8,
+			minlength:4,
+			remote: "uname.php",
+		},
+		pwd: {
+			required:true,
+			maxlength:8,
+			minlength:4
+		},
+		pwd1: {
+			required:true,
+			equalTo: "#pwd",
+			maxlength:8,
+			minlength:4
+		}
+	},
+	
+	messages: {
+		managerName: {
+			required: "Please enter manager name."
+		},
+		managerEmailAddress: {
+			required: "Please enter Email Address.",
+			email: "Please enter valid Email Address."
+		},
+		managerUsername: {
+			required: "Please enter manager username.",
+			remote: "Username Already Exists. Please try another one."
+		},
+		pwd1:
+		{
+			equalTo: "Please Re-Enter the Correct Password"
+		}
+	},
+
+	errorContainer: $('#errorContainer'),
+	errorLabelContainer: $('#errorContainer ul'),
+	wrapper: 'li'
+
+  });
+  
+  
+});
+</script>
+</head>
+
+<body>
+<div align="center">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"  align="center">
+  
+  <tr>
+    
+	<td>
+	<table width="900" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF" >
+  <tr>
+    <td width="187"><?php include('adminheader.php') ?>	</td>
+  </tr>
+	<tr>
+		<td>
+			<div id="errorContainer">
+				<p>Please fill-up all the required fields and try again:</p>
+				<ul />
+			</div>
+		</td>
+	</tr>
+  <tr>
+    <td ><p align="center" class="style1"> Add Manager Details</p>
+        <span class="">
+        <?php if($_POST['submit'])
+{
+
+$managerName = mysqli_real_escape_string($conn, $_REQUEST['managerName']);
+$managerPhone = mysqli_real_escape_string($conn, $_REQUEST['managerPhone']);
+$city = mysqli_real_escape_string($conn, $_REQUEST['city']);
+$managerEmailAddress = mysqli_real_escape_string($conn, $_REQUEST['managerEmailAddress']);
+$uname = $_REQUEST['uname'];
+$pwd = $_REQUEST['pwd'];
+ 
+ if( $managerName =='' ) {
+	$nam1 = "Please Enter Your Name";
+	$ok = 1; 
+ }
+
+ if( $city == '' ) {
+	$city1 = "Please Enter Your City";
+	$ok=1;
+ }
+
+ if($ok!==1) {
+	 $rand=rand();
+	 $rquery=mysqli_query($conn, "select * from manager where rando='$rand'");
+	 if( mysqli_num_rows($rquery) > 0 ) {
+		 $ram=rand();
+	 }
+	 else {
+		 $ram=$rand;
+	 }
+	 
+	$query=mysqli_query($conn, "insert into manager (name,city,phone,rando,email,username) values ('$managerName','$city','$managerPhone','$ram','$txtManagerEmailAddress','$uname')"); 
+	 $rquery1=mysqli_query($conn, "select * from manager where rando='$ram'");
+	 
+	$row=mysqli_fetch_assoc($rquery1);
+	
+	$id=$row['id'];
+	$pre=$row['pref'];
+	$tot=$pre.$id;
+	$update=mysqli_query($conn, "update manager set cusid='$tot' where id='$id'");
+	
+	$usequery=mysqli_query($conn, "insert into adminlogin (adminusername,adminpassword,member) values('$uname','$pwd','Manager')");
+	
+	if($query && $usequery) {
+		?><script type="text/javascript">alert("Manager Details Submitted Successfully");
+        self.location='manager_rep.php';
+        </script><?php
+	}
+	
+ }
+ 
+ 
+ }   ?>
+        </span>
+        <table width="883" align="center">
+        <tr><td width="570">  <table width="721"><form action="" method="post" name="user" id="user">
+            <tr>
+              <td width="103"><label for="txtManagerName">Name</label></td>
+              <td width="435"><input type="text" id='txtManagerName' name="managerName" class="form-field" style="width:255px;"/></td>
+              <td width="17" style="color:red;"><?=$nam1?></td>
+            </tr>
+		   <?php 	if( $type_code == ADMIN ) { ?> 
+			<tr>
+				<td width="103"><label for="sel_city">City</label></td>
+				<td width="435"><?php generateDropdownObject($conn, "bplace","city"); ?></td>
+				<td width="17">&nbsp;</td>
+			</tr>
+			<?php 
+					}
+			 if( $type_code == STATION_ADMIN ) { 
+				$stat = getAssociativeArrayFromSQL($conn, "select * from station where username ='" . $_SESSION['username'] . "'");
+				$city = getAssociativeArrayFromSQL($conn, "select * from bplace where id ='" . $stat['city'] . "'");
+			 ?>
+			<tr>
+				<td width="103"><label for="sel_city">City</label></td>
+				<td width="435">
+					<input type="hidden" id="hdManagerCity" name="managerCity" value="<?php echo $city['id']; ?>" />
+					<input type="text" id="txtManagerVCity" name="vcity" value="<?php echo $city['category']; ?>" style="width:255px;" readonly="readonly" />
+				</td>
+				<td width="17">&nbsp;</td>
+			</tr>
+		   <?php } ?>
+            <tr>
+              <td width="103"><label for="txtManagerPhone">Phone</label></td>
+              <td width="435"><input type="text" id="txtManagerPhone" name="managerPhone" class="form-field" style="width:255px;"/></td>
+              <td  style="color:red;"><?=$phone1?></td>
+            </tr>
+           <tr>
+              <td><label for="txtManagerEmailAddress">Email</label></td>
+              <td><input type="text" id="txtManagerEmailAddress" name="managerEmailAddress" class="form-field" style="width:255px;" />              </td>
+              <td  style="color:red;">&nbsp;</td>
+            </tr>
+			<tr>
+				<td width="103"><label for="txtManagerCode">Manager Code</label></td>
+				<td width="435"><input type="text" id='txtManagerCode' name="managerCode" value="<?php echo $_REQUEST['managerCode']; ?>" class="form-field" style="width:255px;" /></td>
+				<td width="17">&nbsp;</td>
+			</tr>
+											<tr>
+												<td><label for="txtUsername">Username</label></td>
+												<td><input type="text" id="txtUsername" name="managerUsername" value="" class="form-field" autocomplete=off style="width:255px;" /></td>
+												<td width="17">&nbsp;</td>
+											</tr>
+             <tr>
+              <td>Password</td>
+              <td><input type="password" name="pwd" id="pwd" class="form-field" style="width:255px;" />              </td>
+              <td  style="color:red;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Re-Enter Passsword</td>
+              <td><input type="password" name="pwd1" id="pwd1" class="form-field" style="width:255px;" />              </td>
+              <td  style="color:red;">&nbsp;</td>
+            </tr>           
+            <tr>
+              <td width="103"></td>
+              <td width="435"><input type="submit" name="submit" value="Submit" /></td>
+            </tr>
+          </form></table>
+          
+          </td></tr><tr><td width="301">
+          
+          
+          
+          
+          </td></tr>
+        </table></td>
+        
+  </tr>
+
+  
+  <tr><td >&nbsp;</td>
+  </tr>
+  
+<tr>
+    <td><?php include('adminfooter.php') ?></td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table></div>
+</body>
+</html>
