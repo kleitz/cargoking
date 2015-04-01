@@ -146,40 +146,30 @@ final class pager {
 	* @return    string
 	*/
 	public function get_links(){
-	
-	
-		$next_html    = "&nbsp;&nbsp;<a href=\"%s\" class=\"pagnextprev\">Next</a>";
-		$next10_html    = "&nbsp;&nbsp;<a href=\"%s\" class=\"pagnextprev\">Next10</a>";
-		$last_html    = "&nbsp;<a href=\"%s\" class=\"pagnextprev\">Last</a>";
-		$first_html    = "&nbsp;<a href=\"%s\" class=\"pagnextprev\">First</a>";
-		
-		
-		
-		$prev_html    = "<a href=\"%s\" class=\"pagnextprev\">Prev</a>&nbsp;";
-		
-		//$current_html = "<span class=\"pager_active\"><b>>%d<</b></span>";
-		//$max_num_links;
-		//$current_html = "<span class=\"paginbox\"><b>%d</b></span>";
+		$first_html   = "<a href=\"%s\" class=\"pagnextprev\">&nbsp;[First]&nbsp;</a>";
+		$prev_html    = "<a href=\"%s\" class=\"pagnextprev\">&nbsp;[Previous]&nbsp;</a>";
+		$next_html    = "<a href=\"%s\" class=\"pagnextprev\">&nbsp;[Next]&nbsp;</a>";
+		$last_html    = "<a href=\"%s\" class=\"pagnextprev\">&nbsp;[Last]&nbsp;</a>";
+
 		$current_html = "<span class=\"paginbox\"><b>%d</b></span>";
-		//$prev10_html    = "&nbsp;<a href=\"%s\" class=\"pagnextprev\"><< Prev 10</a>&nbsp;";
 		$other_html   = "<a href=\"%s\" class=\"pagingreybox\">%d</a>";
-		
-		
-		if($this->page != 1){
-			$links = sprintf($prev_html, $this->make_link_url($this->page-1));
+
+		if($this->page > 1)
+		{
+			$links = sprintf($first_html, $this->make_link_url(1));
+			$links .= " ";
 		}
-		
-		
-		
-		
+
+		if($this->page != 1){
+			$links .= sprintf($prev_html, $this->make_link_url($this->page-1));
+		}
+
 		$num_links = ($this->get_total_pages() > $this->max_num_links) ? $this->max_num_links : $this->get_total_pages();
 		
 		if($this->page <= floor($this->max_num_links / 2)){
-			
 			$link_page_start = 1;
 			$link_page_end = $num_links;
 		} else {
-			
 			if($this->page <= ($this->get_total_pages()  - floor($this->max_num_links / 2))){
 				$link_page_end = $this->page + floor($this->max_num_links / 2);
 				$link_page_start = $this->page - floor($this->max_num_links / 2);
@@ -187,9 +177,8 @@ final class pager {
 				$link_page_end = $this->get_total_pages();
 				$link_page_start = ($link_page_end - $this->max_num_links) < 1 ? 1 : $link_page_end - $this->max_num_links;
 			}
-			
 		}
-		 
+
 		$link_page = $link_page_start;
 		
 		while($link_page <= $link_page_end){
@@ -202,60 +191,23 @@ final class pager {
 			$link_page++;
 		}
 		$links .= " ";
-		
-		
-		
-		
-		
-		
+
 		if($this->page != $this->get_total_pages())
 		{
 			$links .= sprintf($next_html, $this->make_link_url($this->page+1));
 		}
-	
-	
-		
-		
-	
-		//if($this->page10 <> $this->get_total_pages())
-		//{
-		//	$links .= sprintf($next10_html, $this->make_link_url($this->page+10));
-		//}
-		
-		//////////////////////////////////////////////////////////////////////////////////////////
-		
-		//$selva = ceil($this->get_total_pages()/ 10);
-		//$raja = ($this->get_total_pages() - $selva);
-		$kanna = ceil($this->get_total_pages()- 10);
-		if( ($kanna) > $this->page)
-		{
-		$links .= sprintf($next10_html, $this->make_link_url($this->page+10));
-		} 
-		else
-		{
-		//$links .= sprintf($prev10_html, $this->make_link_url($this->page-10));
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////
-		
-		
-		
+
 		if($this->page <> $this->get_total_pages())
 		{
 		$links .= sprintf($last_html, $this->make_link_url($this->get_total_pages()));
 		}
-		
-		if($this->page == $this->get_total_pages())
-		{
-		$links .= sprintf($first_html, $this->make_link_url($this->get_total_pages()-$this->page+1));
-		}
-		
-			
+
 		if($this->rows == 0 ){
-			$links = sprintf($current_html, $link_page);	
+			$links = sprintf($current_html, $link_page);
 		}
-		
+
 		return($links);
-		
+
 	}
 }
 ?>

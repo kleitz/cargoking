@@ -1,5 +1,6 @@
 <?php 
   	session_start();
+
 	include('biya4u/dbconnect.php');
 	include('biya4u/constants.php');
 	include('biya4u/utilities.php');

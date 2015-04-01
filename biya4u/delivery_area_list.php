@@ -51,7 +51,7 @@
   $limit = 15;
 
   // Perform MySQL query on only the current page number's results 
-  $SQLQuery = "SELECT * FROM delivery_area " . $stationFilter . " ORDER BY area asc LIMIT " . $offset . ", $limit ";
+  $SQLQuery = "SELECT * FROM delivery_area " . $stationFilter . " ORDER BY city asc LIMIT " . $offset . ", $limit ";
   
   //echo "[SQL]: " . $SQLQuery . "<br>";
   

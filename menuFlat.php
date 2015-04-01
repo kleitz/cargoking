@@ -26,7 +26,7 @@
 		<!--
 		<span class="errorMessage">Invalid Username/Password!</span>
 		-->
-		<form action="biya4u/submit_login.php" method="post" enctype="login-form-data" name="login-form-data">
+		<form action="biya4u/submit_login.php" method="post" name="login-form-data">
 			<div>
 				<div class="usernameIcon"></div>
 				<input type="text" id="txtUsername" name="loginUserName" placeholder="Username" required class="logintextField" />
@@ -36,13 +36,21 @@
 				<input type="password" id="txtLoginPassword" name="loginPassword" placeholder="Password" class="logintextField" />
 			</div>
 			<div>
+				<!--
 				<div class="checkIcon"></div>
 				<input type="text" id="txtLoginVerificationCode" name="loginVerificationCode" placeholder="Verification Code" required class="logintextField" />
+				-->
 				<div class="forgotPassword"><a href="#">Forgot your password?</a></div>
 			</div>
+
+			<?php
+			/*
 			<div class="capchaContainer">
 				<img src="biya4u/securimage_show.php?sid=<?php echo md5(uniqid(time())); ?>" />
 			</div>
+			*/
+			?>
+
 				<input type="submit" value="Login" class="buttonLogin" />
 			<!--	
 			<div>

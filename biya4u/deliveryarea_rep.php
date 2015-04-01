@@ -24,7 +24,7 @@
 
 	if(isset($_REQUEST['del_id'])) {
 		$del_id_net = $_REQUEST['del_id' ];
-		$del=mysqli_query($conn, "DELETE FROM deliveryarea WHERE id='$del_id_net' ") or die (mysqli_error());
+		$del=mysqli_query($conn, "DELETE FROM delivery_area WHERE id='$del_id_net' ") or die (mysqli_error());
 		
 		echo "<script type=\"text/javascript\">";
 		echo "self.location='deliveryarea_rep.php?action=delete&success=true';";
@@ -51,7 +51,7 @@
 	$limit = 15;
 
 	// Perform MySQL query on only the current page number's results 
-	$SQLQuery = "SELECT * FROM deliveryarea " . $stationFilter . " ORDER BY city asc LIMIT " . $offset . ", $limit ";
+	$SQLQuery = "SELECT * FROM delivery_area " . $stationFilter . " ORDER BY city asc LIMIT " . $offset . ", $limit ";
 	
 	//echo "[SQL]: " . $SQLQuery . "<br>";
 	

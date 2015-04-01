@@ -178,9 +178,9 @@ AUTO_INCREMENT=2197 CHARACTER SET 'latin1' COLLATE 'latin1_swedish_ci';
 # Structure for the `deliveryarea` table : 
 #
 
-DROP TABLE IF EXISTS `deliveryarea`;
+DROP TABLE IF EXISTS `delivery_area`;
 
-CREATE TABLE `deliveryarea` (
+CREATE TABLE `delivery_area` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `city` TEXT COLLATE latin1_swedish_ci NOT NULL,
   `station` TEXT COLLATE latin1_swedish_ci NOT NULL,
@@ -488,7 +488,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
     `u`.`satellite_office_id` AS `satellite_office_id`,
     `so`.`station_hawb_prefix` AS `hawb_booking_prefix` 
   from 
-    ((`users` `u` join `user_types` `ut` on((`ut`.`id` = `u`.`user_type_id`))) left join `deliveryarea` `so` on((`so`.`id` = `u`.`satellite_office_id`)));
+    ((`users` `u` join `user_types` `ut` on((`ut`.`id` = `u`.`user_type_id`))) left join `delivery_area` `so` on((`so`.`id` = `u`.`satellite_office_id`)));
 
 #
 # Definition for the `vw_booking_details` view : 
@@ -539,7 +539,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
     `b`.`created_by` AS `agent_id`,
     `u`.`name` AS `agent_name` 
   from 
-    (((((((((`booking` `b` left join `vw_loginusers` `u` on((`u`.`id` = `b`.`created_by`))) left join `bplace` `o` on((`o`.`id` = `b`.`origin`))) left join `bplace` `s` on((`s`.`id` = `b`.`destination`))) left join `weight` `w` on((`w`.`id` = `b`.`weight_ref_id`))) left join `mop` on((`mop`.`id` = `b`.`payment_mode_id`))) left join `movement` `mov` on((`mov`.`id` = `b`.`movement_type_id`))) left join `servicemode` `srv` on((`srv`.`id` = `b`.`service_mode_id`))) left join `status` `st` on((`st`.`id` = `b`.`hawb_status`))) left join `deliveryarea` `so` on((`so`.`id` = `b`.`satellite_office_id`)));
+    (((((((((`booking` `b` left join `vw_loginusers` `u` on((`u`.`id` = `b`.`created_by`))) left join `bplace` `o` on((`o`.`id` = `b`.`origin`))) left join `bplace` `s` on((`s`.`id` = `b`.`destination`))) left join `weight` `w` on((`w`.`id` = `b`.`weight_ref_id`))) left join `mop` on((`mop`.`id` = `b`.`payment_mode_id`))) left join `movement` `mov` on((`mov`.`id` = `b`.`movement_type_id`))) left join `servicemode` `srv` on((`srv`.`id` = `b`.`service_mode_id`))) left join `status` `st` on((`st`.`id` = `b`.`hawb_status`))) left join `delivery_area` `so` on((`so`.`id` = `b`.`satellite_office_id`)));
 
 #
 # Definition for the `vw_booking_previous_month` view : 
@@ -1098,7 +1098,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
     `c`.`percentage_discount` AS `percentage_discount`,
     `c`.`created_by` AS `created_by` 
   from 
-    ((`customer` `c` join `bplace` `st` on((`st`.`id` = `c`.`station_id`))) left join `deliveryarea` `so` on((`so`.`id` = `c`.`satellite_office_id`)));
+    ((`customer` `c` join `bplace` `st` on((`st`.`id` = `c`.`station_id`))) left join `delivery_area` `so` on((`so`.`id` = `c`.`satellite_office_id`)));
 
 #
 # Definition for the `vw_hawb_items` view : 
@@ -1150,7 +1150,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
     `u`.`last_modified_date` AS `last_modified_date`,
     `da`.`city` AS `satellite_office` 
   from 
-    (`users` `u` left join `deliveryarea` `da` on((`da`.`id` = `u`.`satellite_office_id`))) 
+    (`users` `u` left join `delivery_area` `da` on((`da`.`id` = `u`.`satellite_office_id`))) 
   where 
     (`u`.`user_type_id` = 7);
 
@@ -1291,10 +1291,10 @@ INSERT INTO `customer` (`id`, `first_name`, `last_name`, `middle_name`, `address
 COMMIT;
 
 #
-# Data for the `deliveryarea` table  (LIMIT 0,500)
+# Data for the `delivery_area` table  (LIMIT 0,500)
 #
 
-INSERT INTO `deliveryarea` (`id`, `city`, `station`, `delarea`, `station_hawb_prefix`, `created_by`, `creation_date`, `last_modified_date`) VALUES 
+INSERT INTO `delivery_area` (`id`, `city`, `station`, `delarea`, `station_hawb_prefix`, `created_by`, `creation_date`, `last_modified_date`) VALUES 
   (1,'Bajada','8',1,'CK-DVO-BAJADA',15,NULL,'2014-05-30 06:31:57'),
   (2,'Toril','8',2,NULL,NULL,NULL,NULL),
   (3,'Pasay','6',1,NULL,NULL,NULL,NULL),

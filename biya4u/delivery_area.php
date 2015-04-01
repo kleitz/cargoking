@@ -27,7 +27,7 @@
 		if( isset($_POST['location']) )         $location         = $_POST['location'];
 		if( isset($_POST['deliveryArea']) )     $deliveryArea     = $_POST['deliveryArea'];
 
-		$SQLInsert = "insert into deliveryarea (city, station, delarea, station_hawb_prefix, created_by, creation_date, last_modified_date) values ('$satelliteOffice', '$location', '$deliveryArea', '$soHawbPrefixCode', $login_id, now(), now())";
+		$SQLInsert = "insert into delivery_area (city, station, delarea, station_hawb_prefix, created_by, creation_date, last_modified_date) values ('$satelliteOffice', '$location', '$deliveryArea', '$soHawbPrefixCode', $login_id, now(), now())";
 
 		$successInsertion = mysqli_query($conn, $SQLInsert); 
 		if( $successInsertion ) {
